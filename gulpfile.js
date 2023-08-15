@@ -1,11 +1,23 @@
-var gulp = require("gulp");
-var browserify = require("browserify");
-var source = require("vinyl-source-stream");
-var terser = require("gulp-terser");
-var tsify = require("tsify");
-var sourcemaps = require("gulp-sourcemaps");
-var buffer = require("vinyl-buffer");
+const gulp = require("gulp");
+const dartSass = require('sass');
+const sass = require('gulp-sass')(dartSass);
+const browserify = require("browserify");
+const source = require("vinyl-source-stream");
+const terser = require("gulp-terser");
+const tsify = require("tsify");
+const sourcemaps = require("gulp-sourcemaps");
+const buffer = require("vinyl-buffer");
 
+// build scss
+const buildStyles = () => {
+    return gulp.src('src/scss/**/*.scss')
+        .pipe(sourcemaps.init())
+        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(sourcemaps.write('./maps'))
+        .pipe(gulp.dest('dist/css'));
+};
+
+// build typescript
 const buildTs = () => {
     return browserify(
         {
@@ -30,8 +42,8 @@ const buildTs = () => {
         .pipe(gulp.dest("dist"));
 }
 
-gulp.task("default", buildTs);
+gulp.task("default", gulp.parallel(buildStyles, buildTs));
 
 gulp.task("watch", () => {
-    gulp.watch(["src"], buildTs)
+    gulp.watch(["src"], gulp.parallel(buildStyles, buildTs))
 })

@@ -1,0 +1,23 @@
+.keypad {
+  display: grid;
+  gap: 1.5rem 2rem;
+  place-items: center;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+
+  &__call-btn {
+    color: #2c2c2e;
+    font-size: 1.25rem;
+    background-color: greenyellow;
+
+    @include rounded;
+  }
+
+  &__clear-btn {
+    color: #1c1c1e;
+    font-size: 1.25rem;
+    background-color: gray;
+
+    @include rounded;
+  }
+}

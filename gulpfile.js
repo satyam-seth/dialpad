@@ -9,7 +9,7 @@ const sourcemaps = require("gulp-sourcemaps");
 const buffer = require("vinyl-buffer");
 
 // build scss
-const buildStyles = () => {
+const buildScss = () => {
     return gulp.src('src/scss/**/*.scss')
         .pipe(sourcemaps.init())
         .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
@@ -42,8 +42,16 @@ const buildTs = () => {
         .pipe(gulp.dest("dist/js"));
 }
 
-gulp.task("default", gulp.parallel(buildStyles, buildTs));
+// task to build scss
+gulp.task("build-scss", buildScss);
 
+// task to build typescript
+gulp.task("build-ts", buildTs);
+
+// defult task
+gulp.task("default", gulp.parallel(buildScss, buildTs));
+
+// watch for change
 gulp.task("watch", () => {
-    gulp.watch(["src"], gulp.parallel(buildStyles, buildTs))
+    gulp.watch(["src"], gulp.parallel(buildScss, buildTs))
 })

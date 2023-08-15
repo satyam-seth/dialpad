@@ -17,6 +17,10 @@ const buildTs = () => {
         }
     )
         .plugin(tsify)
+        .transform("babelify", {
+            presets: ["es2015"],
+            extensions: [".ts"],
+        })
         .bundle()
         .pipe(source("bundle.js"))
         .pipe(buffer())

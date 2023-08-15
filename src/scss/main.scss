@@ -1,3 +1,10 @@
-body {
-  background: black;
-}
+@charset "UTF-8";
+
+// Configuration and helpers
+@import 'abstracts/mixins';
+
+// Base stuff
+@import 'base/resets';
+
+// Components
+@import 'components/buttons';

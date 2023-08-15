@@ -1,4 +1,6 @@
 import hello from './demo';
 
-console.log(hello);
+// eslint-disable-next-line no-console
+console.log(hello)
+// eslint-disable-next-line no-console
 console.log('chalo');

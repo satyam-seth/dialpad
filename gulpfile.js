@@ -38,8 +38,8 @@ const buildTs = () => {
         .pipe(buffer())
         .pipe(sourcemaps.init({ loadMaps: true }))
         .pipe(terser())
-        .pipe(sourcemaps.write("./"))
-        .pipe(gulp.dest("dist"));
+        .pipe(sourcemaps.write("./maps"))
+        .pipe(gulp.dest("dist/js"));
 }
 
 gulp.task("default", gulp.parallel(buildStyles, buildTs));

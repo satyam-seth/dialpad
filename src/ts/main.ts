@@ -1,21 +1,22 @@
-import DialpadButton from './layout/buttons';
+import Keypad from './layout/keypad';
 
 window.onload = () => {
   // eslint-disable-next-line no-console
   console.log('dialpad');
 
-  // create button instance
-  const btn = new DialpadButton({
-    namespace: 'one',
-    ariaLabel: 'One',
-    title: '1',
-    subtitle: 'abc',
-    onClick: () => {
+  // create keypad instance
+  const keypad = new Keypad({
+    namespace: 'dialpad',
+    onCallBtnClick: () => {
       // eslint-disable-next-line no-console
-      console.log('clicked on 1');
+      console.log('clicked on call button');
+    },
+    onClearBtnClick: () => {
+      // eslint-disable-next-line no-console
+      console.log('clicked on clear button');
     },
   });
 
-  // build button
-  btn.build(document.body);
+  // build keypad
+  keypad.build(document.body);
 };

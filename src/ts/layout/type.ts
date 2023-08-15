@@ -1,17 +1,15 @@
 /**
  *
- * config for dialpad button
+ * config for keypad
  *
  */
-export default interface DialpadButtonConfig {
+export default interface KeypadConfig {
   // unique string for namepacing
   namespace: string;
-  // aria label e.g. One, Two, Three etc
-  ariaLabel: string;
-  // title e.g. 1,2,4,* etc
-  title: string;
-  // subtite e.g. ABC, CDE, GHI etc
-  subtitle?: string;
-  // on button click handler
-  onClick: () => void;
+
+  // call button click handler
+  onCallBtnClick: () => void;
+
+  // clear button click handler
+  onClearBtnClick: () => void;
 }

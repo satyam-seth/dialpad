@@ -1,4 +1,4 @@
-import DialpadButton from './layout/buttons';
+import DialpadButton from './components/buttons';
 
 window.onload = () => {
   // eslint-disable-next-line no-console

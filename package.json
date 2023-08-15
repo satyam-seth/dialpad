@@ -10,6 +10,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^5.1.6"
+    "browserify": "^17.0.0",
+    "gulp": "^4.0.0",
+    "tsify": "^5.0.4",
+    "typescript": "^5.1.6",
+    "vinyl-source-stream": "^2.0.0"
   }
 }

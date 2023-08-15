@@ -1,0 +1,11 @@
+/**
+ * Create a rounded element with a specified size and border radius.
+ * 
+ * @param {length} $size - The width and height of the element.
+ * @param {length} $radius - The border radius for rounding the element.
+ */
+@mixin rounded($size: 6.25rem, $radius: 50%) {
+  width: $size;
+  height: $size;
+  border-radius: $radius;
+}

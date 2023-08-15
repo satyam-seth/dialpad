@@ -35,6 +35,9 @@ export default class Keypad {
       btn.build(keypad);
     });
 
+    // append dummy element
+    keypad.appendChild(document.createElement('span'));
+
     // append call button
     keypad.appendChild(this.callButton);
 

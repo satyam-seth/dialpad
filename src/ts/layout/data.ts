@@ -46,9 +46,9 @@ const KEYPAD_BUTTONS_DATA: Array<DialpadButtonConfig> = [
     },
   },
   {
-    namespace: 'Five',
-    ariaLabel: 'Two',
-    title: '2',
+    namespace: 'five',
+    ariaLabel: 'Five',
+    title: '5',
     subtitle: 'JKL',
     onClick: () => {
       // eslint-disable-next-line no-console

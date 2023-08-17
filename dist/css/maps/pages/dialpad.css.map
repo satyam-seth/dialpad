@@ -1,0 +1,1 @@
+{"version":3,"sources":["pages/dialpad.scss"],"names":[],"mappings":"AAAA,gBACE,aACA","file":"../../pages/dialpad.css","sourcesContent":["section.dialpad {\n  display: grid;\n  grid-template-rows: repeat(2, 1fr);\n}\n"]}

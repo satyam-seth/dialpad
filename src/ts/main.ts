@@ -1,5 +1,5 @@
 import InputElement from './components/inputs/inputs';
-import Keypad from './layout/keypad';
+import Dialpad from './pages/dialpad';
 
 // extend type
 declare global {
@@ -13,25 +13,9 @@ declare global {
 window.inputElement = InputElement.instance;
 
 window.onload = () => {
-  // eslint-disable-next-line no-console
-  console.log('dialpad');
+  // create dialpad instance
+  const dialpad = new Dialpad({ namespace: 'demo' });
 
-  // append input element
-  InputElement.instance.build(document.body);
-
-  // create keypad instance
-  const keypad = new Keypad({
-    namespace: 'dialpad',
-    onCallBtnClick: () => {
-      // eslint-disable-next-line no-console
-      console.log('clicked on call button');
-    },
-    onClearBtnClick: () => {
-      // eslint-disable-next-line no-console
-      console.log('clicked on clear button');
-    },
-  });
-
-  // build keypad
-  keypad.build(document.body);
+  // build dialpad
+  dialpad.build(document.body);
 };

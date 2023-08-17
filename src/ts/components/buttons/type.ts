@@ -1,5 +1,13 @@
 /**
  *
+ * Dialpad button click handler type
+ *
+ */
+// eslint-disable-next-line no-unused-vars
+export type DialpadButtonClickHandler = (value: string) => void;
+
+/**
+ *
  * Config for dialpad button
  *
  */
@@ -17,5 +25,5 @@ export default interface DialpadButtonConfig {
   subtitle?: string;
 
   // button click handler
-  onClick: () => void;
+  onClick: DialpadButtonClickHandler;
 }

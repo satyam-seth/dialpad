@@ -44,13 +44,25 @@ export default class Dialpad {
   private get keypadLayout() {
     const keypad = new Keypad({
       namespace: this.config.namespace,
+      onKeypadButtonClick: (value: string) => {
+        // eslint-disable-next-line no-console
+        console.log('clicked on button', value);
+
+        // insert value
+        this.inputField.insertValue(value);
+      },
       onCallBtnClick: () => {
         // eslint-disable-next-line no-console
         console.log('clicked on call button');
+
+        // eslint-disable-next-line no-console
+        console.log('placing call on ', this.inputField.value);
       },
       onClearBtnClick: () => {
         // eslint-disable-next-line no-console
         console.log('clicked on clear button');
+
+        this.inputField.remove();
       },
     });
 

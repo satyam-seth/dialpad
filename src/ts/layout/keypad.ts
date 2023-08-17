@@ -1,7 +1,6 @@
 import DialpadButton from '../components/buttons/buttons';
-import DialpadButtonConfig from '../components/buttons/type';
 import KEYPAD_BUTTONS_DATA from './data';
-import KeypadConfig from './type';
+import { KeypadButtonData, KeypadConfig } from './type';
 
 /**
  *
@@ -27,9 +26,14 @@ export default class Keypad {
     keypad.classList.add('keypad');
 
     // append digits buttons
-    KEYPAD_BUTTONS_DATA.forEach((config: DialpadButtonConfig) => {
+    KEYPAD_BUTTONS_DATA.forEach((config: KeypadButtonData) => {
       // create button instance
-      const btn = new DialpadButton(config);
+      const btn = new DialpadButton({
+        namespace: config.namespace,
+        ariaLabel: config.ariaLabel,
+        title: config.title,
+        onClick: this.config.onKeypadButtonClick,
+      });
 
       // append button
       btn.build(keypad);

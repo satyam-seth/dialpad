@@ -1,4 +1,4 @@
-import DialpadButtonConfig from '../components/type';
+import DialpadButtonConfig from '../components/buttons/type';
 
 /**
  *

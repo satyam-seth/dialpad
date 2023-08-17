@@ -1,5 +1,5 @@
-import DialpadButton from '../components/buttons';
-import DialpadButtonConfig from '../components/type';
+import DialpadButton from '../components/buttons/buttons';
+import DialpadButtonConfig from '../components/buttons/type';
 import KEYPAD_BUTTONS_DATA from './data';
 import KeypadConfig from './type';
 

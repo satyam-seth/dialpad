@@ -1,0 +1,18 @@
+/**
+ *
+ * Styles for a dialpad section.
+ *
+ * The `.dialpad` class defines styling for a section that contains a dialpad interface.
+ * It includes properties for width, height, display, gap, alignment, and flex direction,
+ * ensuring proper layout and positioning of the dialpad elements.
+ *
+ */
+section.dialpad {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}

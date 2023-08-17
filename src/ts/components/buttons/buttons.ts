@@ -31,7 +31,9 @@ export default class DialpadButton {
     button.appendChild(this.subtitleElement);
 
     // add click event listener
-    button.addEventListener('click', this.config.onClick);
+    button.addEventListener('click', () => {
+      this.config.onClick(this.config.title);
+    });
 
     return button;
   }

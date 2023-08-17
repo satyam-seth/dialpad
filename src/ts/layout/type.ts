@@ -4,7 +4,7 @@
  *
  */
 export default interface KeypadConfig {
-  // unique string for namepacing
+  // unique string for namespacing
   namespace: string;
 
   // call button click handler

@@ -1,10 +1,10 @@
 /**
  *
- * config for dialpad button
+ * Config for dialpad button
  *
  */
 export default interface DialpadButtonConfig {
-  // unique string for namepacing
+  // unique string for namespacing
   namespace: string;
 
   // aria label e.g. One, Two, Three etc
@@ -13,7 +13,7 @@ export default interface DialpadButtonConfig {
   // title e.g. 1,2,4,* etc
   title: string;
 
-  // subtite e.g. ABC, CDE, GHI etc
+  // subtitle e.g. ABC, CDE, GHI etc
   subtitle?: string;
 
   // button click handler

@@ -10,7 +10,7 @@ export default class InputElement {
 
   /**
    *
-   * make constructor private to prevent direct
+   * Make constructor private to prevent direct
    * construction calls with the `new` operator.
    *
    */
@@ -57,7 +57,7 @@ export default class InputElement {
 
   /**
    *
-   * input element query selector for dom manipulation
+   * Input element query selector for dom manipulation
    *
    */
   get querySelector(): HTMLInputElement {
@@ -66,7 +66,7 @@ export default class InputElement {
 
   /**
    *
-   * appends input element to a specified parent element.
+   * Appends input element to a specified parent element.
    *
    * @param parentElement
    *
@@ -77,7 +77,7 @@ export default class InputElement {
 
   /**
    *
-   * make sure input element is foucsed
+   * Make sure input element is focused
    *
    */
   makeSureFocused() {

@@ -5,7 +5,7 @@ import KeypadConfig from './type';
 
 /**
  *
- * Dialpad Button
+ * Keypad
  *
  */
 export default class Keypad {
@@ -18,7 +18,7 @@ export default class Keypad {
 
   /**
    *
-   * keypad skeleton
+   * Keypad skeleton
    *
    */
   private get skeleton(): HTMLDivElement {
@@ -49,7 +49,7 @@ export default class Keypad {
 
   /**
    *
-   * keypad call button
+   * Keypad call button
    *
    */
   private get callButton(): HTMLElement {
@@ -66,7 +66,7 @@ export default class Keypad {
 
   /**
    *
-   * keypad clear button
+   * Keypad clear button
    *
    */
   private get clearButton(): HTMLElement {
@@ -83,7 +83,7 @@ export default class Keypad {
 
   /**
    *
-   * unique id for keypad
+   * Unique id for keypad
    *
    */
   get id() {
@@ -92,7 +92,7 @@ export default class Keypad {
 
   /**
    *
-   * keypad query selector for dom manipulation
+   * Keypad query selector for dom manipulation
    *
    */
   get querySelector(): HTMLDivElement {
@@ -101,7 +101,7 @@ export default class Keypad {
 
   /**
    *
-   * append keypad to a specified parent element.
+   * Appends keypad to a specified parent element.
    *
    * @param parentElement
    *

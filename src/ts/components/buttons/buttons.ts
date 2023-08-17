@@ -15,7 +15,7 @@ export default class DialpadButton {
 
   /**
    *
-   * dialpad button skeleton
+   * Dialpad button skeleton
    *
    */
   private get skeleton(): HTMLButtonElement {
@@ -38,7 +38,7 @@ export default class DialpadButton {
 
   /**
    *
-   * dialpad button tile element
+   * Dialpad button tile element
    *
    */
   private get titleElement(): HTMLElement {
@@ -50,7 +50,7 @@ export default class DialpadButton {
 
   /**
    *
-   * dialpad button subtile
+   * Dialpad button subtile
    *
    */
   private get subtitleElement(): HTMLElement {
@@ -62,7 +62,7 @@ export default class DialpadButton {
 
   /**
    *
-   * unique id for dialpad button
+   * Unique id for dialpad button
    *
    */
   get id() {
@@ -71,7 +71,7 @@ export default class DialpadButton {
 
   /**
    *
-   * dialpad button query selector for dom manipulation
+   * Dialpad button query selector for dom manipulation
    *
    */
   get querySelector(): HTMLButtonElement {
@@ -80,7 +80,7 @@ export default class DialpadButton {
 
   /**
    *
-   * appends dialpad button to a specified parent element.
+   * Appends dialpad button to a specified parent element.
    *
    * @param parentElement
    *

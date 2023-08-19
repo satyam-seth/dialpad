@@ -42,6 +42,12 @@ export default class InputElement {
     input.className = this.className;
     input.autofocus = true;
     input.type = 'text';
+
+    // try to prevent the keyboard from popping up on mobile devices
+    input.addEventListener('focus', (e) => {
+      e.preventDefault();
+    });
+
     return input;
   }
 

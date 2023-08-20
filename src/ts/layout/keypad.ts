@@ -1,4 +1,5 @@
 import DialpadButton from '../components/buttons/buttons';
+import LongPressEvent from '../utilities/longPress';
 import KEYPAD_BUTTONS_DATA from './data';
 import { KeypadButtonData, KeypadConfig } from './types';
 
@@ -94,7 +95,10 @@ export default class Keypad {
     backspaceBtn.appendChild(this.getMaterialIcon('backspace'));
 
     // add click event listener
-    backspaceBtn.addEventListener('click', this.config.onClearBtnClick);
+    backspaceBtn.addEventListener('click', this.config.onBackspaceBtnClick);
+
+    // apply long press event
+    LongPressEvent.apply(backspaceBtn, this.config.onBackspaceBtnLongPress);
 
     return backspaceBtn;
   }

@@ -16,8 +16,11 @@ export interface KeypadConfig {
   // call button click handler
   onCallBtnClick: () => void;
 
-  // clear button click handler
-  onClearBtnClick: () => void;
+  // backspace button click handler
+  onBackspaceBtnClick: () => void;
+
+  // on backspace button long press handler
+  onBackspaceBtnLongPress: () => void;
 }
 
 /**

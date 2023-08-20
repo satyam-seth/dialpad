@@ -11,6 +11,12 @@ export default class Dialpad {
   // dialpad configuration
   private config: DialpadConfig;
 
+  // input field instance
+  private inputField!: InputElement;
+
+  // keypad instance
+  private keypad!: Keypad;
+
   constructor(config: DialpadConfig) {
     this.config = config;
   }
@@ -28,7 +34,7 @@ export default class Dialpad {
     dialpad.className = 'dialpad';
 
     // build input field
-    this.inputField.build(dialpad);
+    this.inputFieldLayout.build(dialpad);
 
     // build keypad layout
     this.keypadLayout.build(dialpad);
@@ -36,13 +42,35 @@ export default class Dialpad {
     return dialpad;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  private get inputField() {
-    return InputElement.instance;
+  /**
+   *
+   * To get Input Element
+   *
+   */
+  private get inputFieldLayout(): InputElement {
+    this.inputField = new InputElement({
+      namespace: this.config.namespace,
+      onValueEmpty: () => {
+        // eslint-disable-next-line no-console
+        console.log('disable backspace button');
+        this.keypad.disableBackspaceButton();
+      },
+      onValueNonEmpty: () => {
+        // eslint-disable-next-line no-console
+        console.log('enable backspace button');
+        this.keypad.enableBackspaceButton();
+      },
+    });
+    return this.inputField;
   }
 
+  /**
+   *
+   * To get Keypad Layout
+   *
+   */
   private get keypadLayout() {
-    const keypad = new Keypad({
+    this.keypad = new Keypad({
       namespace: this.config.namespace,
       onKeypadButtonClick: (value: string) => {
         // eslint-disable-next-line no-console
@@ -50,6 +78,7 @@ export default class Dialpad {
 
         // insert value
         this.inputField.insertValue(value);
+        this.keypad.enableBackspaceButton();
       },
       onCallBtnClick: () => {
         // eslint-disable-next-line no-console
@@ -61,12 +90,11 @@ export default class Dialpad {
       onClearBtnClick: () => {
         // eslint-disable-next-line no-console
         console.log('clicked on clear button');
-
-        this.inputField.remove();
+        this.inputField.removeValue();
       },
     });
 
-    return keypad;
+    return this.keypad;
   }
 
   /**

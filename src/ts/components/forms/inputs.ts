@@ -1,35 +1,16 @@
+import { InputElementConfig } from './types';
+
 /**
  *
  * Input Element
  *
  */
 export default class InputElement {
-  // singleton instance
-  // eslint-disable-next-line no-use-before-define
-  private static singletonInstance: InputElement;
+  // input element config
+  private config: InputElementConfig;
 
-  /**
-   *
-   * Make constructor private to prevent direct
-   * construction calls with the `new` operator.
-   *
-   */
-  // eslint-disable-next-line no-useless-constructor, no-empty-function
-  private constructor() {}
-
-  /**
-   *
-   *  The static method that controls the access to the singleton instance.
-   *
-   */
-  static get instance() {
-    // if singleton instance is not initialized yet,
-    // create new instance assign to singleton instance
-    if (!InputElement.singletonInstance) {
-      InputElement.singletonInstance = new InputElement();
-    }
-
-    return InputElement.singletonInstance;
+  constructor(config: InputElementConfig) {
+    this.config = config;
   }
 
   /**
@@ -39,23 +20,18 @@ export default class InputElement {
    */
   private get skeleton(): HTMLInputElement {
     const input = document.createElement('input');
-    input.className = this.className;
+    input.id = this.id;
+    input.className = 'input-element';
     input.name = 'number';
     input.type = 'text';
     input.autofocus = true;
     input.inputMode = 'none';
     input.autocomplete = 'off';
-    return input;
-  }
 
-  /**
-   *
-   * css class name for input element
-   *
-   */
-  // eslint-disable-next-line class-methods-use-this
-  get className() {
-    return 'input-element';
+    // add input event listener
+    input.addEventListener('input', this.inputEventHandler.bind(this));
+
+    return input;
   }
 
   /**
@@ -64,7 +40,18 @@ export default class InputElement {
    *
    */
   get querySelector(): HTMLInputElement {
-    return document.querySelector(`.${this.className}`)! as HTMLInputElement;
+    return document.getElementById(this.id) as HTMLInputElement;
+  }
+
+  /**
+   *
+   * Unique id for input element
+   *
+   * @returns {string}
+   *
+   */
+  get id(): string {
+    return `input-${this.config.namespace}`;
   }
 
   /**
@@ -186,7 +173,7 @@ export default class InputElement {
    * @param count - The number of characters, default value is 1
    *
    */
-  remove(count: number = 1) {
+  removeValue(count: number = 1) {
     // capture current state
     const currentValue = this.value;
     const currentCaretPosition = this.caretPosition;
@@ -201,6 +188,9 @@ export default class InputElement {
     // update state
     this.value = updatedValue;
     this.caretPosition = updatedCaretPosition;
+
+    // check empty or not
+    this.inputEventHandler();
   }
 
   /**
@@ -211,5 +201,22 @@ export default class InputElement {
   clear() {
     this.value = '';
     this.focus();
+  }
+
+  /**
+   *
+   * `input` event handler
+   *
+   */
+  inputEventHandler() {
+    if (this.value === '') {
+      // eslint-disable-next-line no-console
+      console.log('value empty');
+      this.config.onValueEmpty();
+    } else {
+      // eslint-disable-next-line no-console
+      console.log('value non empty');
+      this.config.onValueNonEmpty();
+    }
   }
 }

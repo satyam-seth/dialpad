@@ -1,4 +1,5 @@
 import DialpadButton from '../components/buttons/buttons';
+import LongPressEvent from '../utilities/longPress';
 import KEYPAD_BUTTONS_DATA from './data';
 import { KeypadButtonData, KeypadConfig } from './types';
 
@@ -11,6 +12,11 @@ export default class Keypad {
   // keypad config
   private config: KeypadConfig;
 
+  /**
+   *
+   * construct Keypad instance
+   *
+   */
   constructor(config: KeypadConfig) {
     this.config = config;
   }
@@ -33,7 +39,9 @@ export default class Keypad {
         ariaLabel: config.ariaLabel,
         title: config.title,
         subtitle: config.subtitle,
-        onClick: this.config.onKeypadButtonClick,
+        onClick: this.config.onKeypadBtnClick,
+        onLongPress:
+          config.title === '0' ? this.config.onZeroBtnLongPress : undefined,
       });
 
       // append button
@@ -94,7 +102,13 @@ export default class Keypad {
     backspaceBtn.appendChild(this.getMaterialIcon('backspace'));
 
     // add click event listener
-    backspaceBtn.addEventListener('click', this.config.onClearBtnClick);
+    backspaceBtn.addEventListener('click', this.config.onBackspaceBtnClick);
+
+    // apply long press event
+    LongPressEvent.apply({
+      target: backspaceBtn,
+      onLongPressCallback: this.config.onBackspaceBtnLongPress,
+    });
 
     return backspaceBtn;
   }

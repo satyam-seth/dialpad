@@ -17,6 +17,11 @@ export default class Dialpad {
   // keypad instance
   private keypad!: Keypad;
 
+  /**
+   *
+   * construct Dialpad instance
+   *
+   */
   constructor(config: DialpadConfig) {
     this.config = config;
   }
@@ -72,13 +77,20 @@ export default class Dialpad {
   private get keypadLayout() {
     this.keypad = new Keypad({
       namespace: this.config.namespace,
-      onKeypadButtonClick: (value: string) => {
+      onKeypadBtnClick: (value: string) => {
         // eslint-disable-next-line no-console
         console.log('clicked on button', value);
 
         // insert value
         this.inputField.insertValue(value);
         this.keypad.enableBackspaceButton();
+      },
+      onZeroBtnLongPress: (value: string) => {
+        // eslint-disable-next-line no-console
+        console.log('long pressed on zero button');
+
+        // insert zero button subtitle value `+`
+        this.inputField.replaceValue(value);
       },
       onCallBtnClick: () => {
         // eslint-disable-next-line no-console
@@ -87,10 +99,19 @@ export default class Dialpad {
         // eslint-disable-next-line no-console
         console.log('placing call on ', this.inputField.value);
       },
-      onClearBtnClick: () => {
+      onBackspaceBtnClick: () => {
         // eslint-disable-next-line no-console
         console.log('clicked on clear button');
         this.inputField.removeValue();
+      },
+      onBackspaceBtnLongPress: () => {
+        // eslint-disable-next-line no-console
+        console.log('long press on backspace button');
+
+        // clear input value and hide backspace button
+        this.inputField.value = '';
+        this.inputField.focus();
+        this.keypad.disableBackspaceButton();
       },
     });
 

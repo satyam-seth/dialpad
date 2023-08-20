@@ -9,6 +9,11 @@ export default class InputElement {
   // input element config
   private config: InputElementConfig;
 
+  /**
+   *
+   * construct InputElement instance
+   *
+   */
   constructor(config: InputElementConfig) {
     this.config = config;
   }
@@ -200,6 +205,16 @@ export default class InputElement {
 
   /**
    *
+   * @param value - The value to be replaced current last value
+   *
+   */
+  replaceValue(value: string) {
+    this.removeValue();
+    this.insertValue(value);
+  }
+
+  /**
+   *
    * Clear the value of input element
    *
    */
@@ -235,7 +250,7 @@ export default class InputElement {
    * `input` event handler
    *
    */
-  inputEventHandler() {
+  private inputEventHandler() {
     // Remove unwanted symbols and allow only digits, +, *, and #
     this.validation();
 

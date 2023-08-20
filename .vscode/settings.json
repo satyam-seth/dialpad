@@ -10,5 +10,6 @@
   },
   "[typescript]": {
     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-  }
+  },
+  "files.eol": "\n"
 }

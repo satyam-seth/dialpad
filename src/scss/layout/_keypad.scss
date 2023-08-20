@@ -6,18 +6,25 @@
   grid-template-columns: repeat(3, 1fr);
 
   &__call-btn {
-    color: #2c2c2e;
-    font-size: 1.25rem;
-    background-color: greenyellow;
+    background-color: #5bc236;
 
     @include rounded;
+
+    .material-symbols-outlined {
+      color: white;
+      font-size: 2.5rem;
+    }
   }
 
-  &__clear-btn {
-    color: #1c1c1e;
-    font-size: 1.25rem;
-    background-color: gray;
+  &__backspace-btn {
+    border: 0;
+    background-color: transparent;
 
     @include rounded;
+
+    .material-symbols-outlined {
+      color: white;
+      font-size: 3rem;
+    }
   }
 }

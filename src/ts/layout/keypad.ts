@@ -32,6 +32,7 @@ export default class Keypad {
         namespace: config.namespace,
         ariaLabel: config.ariaLabel,
         title: config.title,
+        subtitle: config.subtitle,
         onClick: this.config.onKeypadButtonClick,
       });
 
@@ -45,10 +46,18 @@ export default class Keypad {
     // append call button
     keypad.appendChild(this.callButton);
 
-    // append clear button
-    keypad.appendChild(this.clearButton);
+    // append backspace button
+    keypad.appendChild(this.backspaceButton);
 
     return keypad;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  getMaterialIcon(iconName: string) {
+    const iconElement = document.createElement('span');
+    iconElement.className = 'material-symbols-outlined';
+    iconElement.innerText = iconName;
+    return iconElement;
   }
 
   /**
@@ -60,7 +69,9 @@ export default class Keypad {
     const callBtn = document.createElement('button');
     callBtn.classList.add('keypad__call-btn');
     callBtn.setAttribute('aria-label', 'call button');
-    callBtn.innerText = 'Call';
+
+    // append call icon
+    callBtn.appendChild(this.getMaterialIcon('call'));
 
     // add click event listener
     callBtn.addEventListener('click', this.config.onCallBtnClick);
@@ -70,19 +81,21 @@ export default class Keypad {
 
   /**
    *
-   * Keypad clear button
+   * Keypad backspace button
    *
    */
-  private get clearButton(): HTMLElement {
-    const clearBtn = document.createElement('button');
-    clearBtn.classList.add('keypad__clear-btn');
-    clearBtn.setAttribute('aria-label', 'clear button');
-    clearBtn.innerText = 'Clear';
+  private get backspaceButton(): HTMLElement {
+    const backspaceBtn = document.createElement('button');
+    backspaceBtn.classList.add('keypad__backspace-btn');
+    backspaceBtn.setAttribute('aria-label', 'Backspace button');
+
+    // append backspace icon
+    backspaceBtn.appendChild(this.getMaterialIcon('backspace'));
 
     // add click event listener
-    clearBtn.addEventListener('click', this.config.onClearBtnClick);
+    backspaceBtn.addEventListener('click', this.config.onClearBtnClick);
 
-    return clearBtn;
+    return backspaceBtn;
   }
 
   /**

@@ -1,4 +1,4 @@
-import InputElement from '../components/inputs/inputs';
+import InputElement from '../components/forms/inputs';
 import Keypad from '../layout/keypad';
 import DialpadConfig from './types';
 

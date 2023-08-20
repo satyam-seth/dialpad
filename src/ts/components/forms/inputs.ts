@@ -180,17 +180,22 @@ export default class InputElement {
 
     // prepare updated state
     const beforeCaretValue = currentValue.slice(0, currentCaretPosition);
-    const afterCaretValue = currentValue.slice(currentCaretPosition);
-    const endIndex = beforeCaretValue.length - count;
-    const updatedValue = beforeCaretValue.slice(0, endIndex) + afterCaretValue;
-    const updatedCaretPosition = currentCaretPosition - count;
 
-    // update state
-    this.value = updatedValue;
-    this.caretPosition = updatedCaretPosition;
+    // if before caret value is empty do nothing
+    if (beforeCaretValue !== '') {
+      const afterCaretValue = currentValue.slice(currentCaretPosition);
+      const endIndex = beforeCaretValue.length - count;
+      const updatedValue =
+        beforeCaretValue.slice(0, endIndex) + afterCaretValue;
+      const updatedCaretPosition = currentCaretPosition - count;
 
-    // check empty or not
-    this.inputEventHandler();
+      // update state
+      this.value = updatedValue;
+      this.caretPosition = updatedCaretPosition;
+
+      // check empty or not
+      this.inputEventHandler();
+    }
   }
 
   /**

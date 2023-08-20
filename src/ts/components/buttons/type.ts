@@ -6,6 +6,9 @@
 // eslint-disable-next-line no-unused-vars
 export type DialpadButtonClickHandler = (value: string) => void;
 
+// eslint-disable-next-line no-unused-vars
+export type DialpadButtonLongPressHandler = (value: string) => void;
+
 /**
  *
  * Config for dialpad button
@@ -26,4 +29,7 @@ export default interface DialpadButtonConfig {
 
   // button click handler
   onClick: DialpadButtonClickHandler;
+
+  // button long press handler
+  onLongPress?: DialpadButtonLongPressHandler;
 }

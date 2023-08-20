@@ -1,3 +1,5 @@
+import LongPressEventConfig from './types';
+
 /**
  *
  * LongPress event
@@ -5,10 +7,7 @@
  */
 export default class LongPressEvent {
   // target html element
-  private target: EventTarget;
-
-  // callback function
-  private callback: Function;
+  private config: LongPressEventConfig;
 
   // state to detect press and hold
   private isHeld: boolean = false;
@@ -16,24 +15,39 @@ export default class LongPressEvent {
   // setTimeout Id
   private activeHoldTimeoutId: number | null = null;
 
+  // long press timeout in milliseconds
+  private longPressTimeout = 500;
+
   /**
-   * @param {EventTarget} target The HTML element to apply the event to
-   * @param {Function} callback The function to run once the target is clicked and held
+   *
+   * construct LongPressEvent instance and add event listener
+   *
    */
-  constructor(target: EventTarget, callback: Function) {
-    this.target = target;
-    this.callback = callback;
+  constructor(config: LongPressEventConfig) {
+    this.config = config;
 
     // start timer
-    this.target.addEventListener('mousedown', this.onHoldStart.bind(this));
-    this.target.addEventListener('touchstart', this.onHoldStart.bind(this));
+    this.config.target.addEventListener(
+      'mousedown',
+      this.onHoldStart.bind(this)
+    );
+    this.config.target.addEventListener(
+      'touchstart',
+      this.onHoldStart.bind(this)
+    );
 
     // stop timer
-    this.target.addEventListener('mouseup', this.onHoldEnd.bind(this));
-    this.target.addEventListener('mouseout', this.onHoldEnd.bind(this));
-    this.target.addEventListener('mouseleave', this.onHoldEnd.bind(this));
-    this.target.addEventListener('touchend', this.onHoldEnd.bind(this));
-    this.target.addEventListener('touchcancel', this.onHoldEnd.bind(this));
+    this.config.target.addEventListener('mouseup', this.onHoldEnd.bind(this));
+    this.config.target.addEventListener('mouseout', this.onHoldEnd.bind(this));
+    this.config.target.addEventListener(
+      'mouseleave',
+      this.onHoldEnd.bind(this)
+    );
+    this.config.target.addEventListener('touchend', this.onHoldEnd.bind(this));
+    this.config.target.addEventListener(
+      'touchcancel',
+      this.onHoldEnd.bind(this)
+    );
   }
 
   /**
@@ -46,13 +60,18 @@ export default class LongPressEvent {
     console.log('Start Pressing');
     this.isHeld = true;
 
+    // call on press start handler
+    if (this.config.onPressStart) {
+      this.config.onPressStart();
+    }
+
     this.activeHoldTimeoutId = window.setTimeout(() => {
       if (this.isHeld === true) {
         // eslint-disable-next-line no-console
         console.log('long press detected');
-        this.callback();
+        this.config.onLongPressCallback();
       }
-    }, 1000);
+    }, this.longPressTimeout);
   }
 
   /**
@@ -73,15 +92,12 @@ export default class LongPressEvent {
 
   /**
    *
-   * Apply long press event without using new keyword
-   *
-   * @param {EventTarget} target The HTML element to apply the event to
-   * @param {Function} callback The function to run once the target is clicked and held
+   * Apply long press event without using `new` keyword
    *
    */
-  static apply(target: EventTarget, callback: Function) {
+  static apply(config: LongPressEventConfig) {
     // eslint-disable-next-line no-new
-    new LongPressEvent(target, callback);
+    new LongPressEvent(config);
   }
 }
 

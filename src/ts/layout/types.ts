@@ -1,4 +1,7 @@
-import { DialpadButtonClickHandler } from '../components/buttons/type';
+import {
+  DialpadButtonClickHandler,
+  DialpadButtonLongPressHandler,
+} from '../components/buttons/type';
 
 /**
  *
@@ -11,7 +14,10 @@ export interface KeypadConfig {
 
   // keypad button (e.g. 1, 2, *, # etc) click handler
   // eslint-disable-next-line no-unused-vars
-  onKeypadButtonClick: DialpadButtonClickHandler;
+  onKeypadBtnClick: DialpadButtonClickHandler;
+
+  // zero button long press handler
+  onZeroBtnLongPress: DialpadButtonLongPressHandler;
 
   // call button click handler
   onCallBtnClick: () => void;

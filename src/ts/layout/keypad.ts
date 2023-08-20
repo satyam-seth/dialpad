@@ -12,6 +12,11 @@ export default class Keypad {
   // keypad config
   private config: KeypadConfig;
 
+  /**
+   *
+   * construct Keypad instance
+   *
+   */
   constructor(config: KeypadConfig) {
     this.config = config;
   }
@@ -34,7 +39,9 @@ export default class Keypad {
         ariaLabel: config.ariaLabel,
         title: config.title,
         subtitle: config.subtitle,
-        onClick: this.config.onKeypadButtonClick,
+        onClick: this.config.onKeypadBtnClick,
+        onLongPress:
+          config.title === '0' ? this.config.onZeroBtnLongPress : undefined,
       });
 
       // append button
@@ -98,7 +105,10 @@ export default class Keypad {
     backspaceBtn.addEventListener('click', this.config.onBackspaceBtnClick);
 
     // apply long press event
-    LongPressEvent.apply(backspaceBtn, this.config.onBackspaceBtnLongPress);
+    LongPressEvent.apply({
+      target: backspaceBtn,
+      onLongPressCallback: this.config.onBackspaceBtnLongPress,
+    });
 
     return backspaceBtn;
   }

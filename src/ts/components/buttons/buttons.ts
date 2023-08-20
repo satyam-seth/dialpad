@@ -1,3 +1,4 @@
+import LongPressEvent from '../../utilities/longPress';
 import DialpadButtonConfig from './type';
 
 /**
@@ -9,7 +10,17 @@ export default class DialpadButton {
   // button config
   private config: DialpadButtonConfig;
 
+  /**
+   *
+   * construct DialpadButton instance
+   *
+   */
   constructor(config: DialpadButtonConfig) {
+    // config assertion
+    if (config.subtitle === undefined && config.onLongPress !== undefined) {
+      throw new Error('Invalid config for dialPad button');
+    }
+
     this.config = config;
   }
 
@@ -30,10 +41,23 @@ export default class DialpadButton {
     // append subtitle
     button.appendChild(this.subtitleElement);
 
-    // add click event listener
-    button.addEventListener('click', () => {
-      this.config.onClick(this.config.title);
-    });
+    // apply long press event
+    if (this.config.onLongPress !== undefined) {
+      LongPressEvent.apply({
+        target: button,
+        onLongPressCallback: () => {
+          this.config.onLongPress!(this.config.subtitle!);
+        },
+        onPressStart: () => {
+          this.config.onClick(this.config.title);
+        },
+      });
+    } else {
+      // add click event listener
+      button.addEventListener('click', () => {
+        this.config.onClick(this.config.title);
+      });
+    }
 
     return button;
   }

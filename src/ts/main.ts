@@ -1,4 +1,4 @@
-import InputElement from './components/inputs/inputs';
+import InputElement from './components/forms/inputs';
 import Dialpad from './pages/dialpad';
 
 // extend type

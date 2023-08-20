@@ -17,6 +17,9 @@ export default class Dialpad {
   // keypad instance
   private keypad!: Keypad;
 
+  // recent call number
+  private recentCallOnNumber?: string;
+
   /**
    *
    * construct Dialpad instance
@@ -96,8 +99,21 @@ export default class Dialpad {
         // eslint-disable-next-line no-console
         console.log('clicked on call button');
 
-        // eslint-disable-next-line no-console
-        console.log('placing call on ', this.inputField.value);
+        // check whether try to call on recent number
+        if (
+          this.inputField.value === '' &&
+          this.recentCallOnNumber !== undefined
+        ) {
+          // eslint-disable-next-line no-console
+          console.log('fill last call on number in input field value');
+          this.inputField.value = this.recentCallOnNumber;
+        } else {
+          // update last call on number
+          this.recentCallOnNumber = this.inputField.value;
+
+          // eslint-disable-next-line no-console
+          console.log('placing call on ', this.inputField.value);
+        }
       },
       onBackspaceBtnClick: () => {
         // eslint-disable-next-line no-console

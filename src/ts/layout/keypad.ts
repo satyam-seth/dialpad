@@ -1,6 +1,6 @@
 import DialpadButton from '../components/buttons/buttons';
 import KEYPAD_BUTTONS_DATA from './data';
-import { KeypadButtonData, KeypadConfig } from './type';
+import { KeypadButtonData, KeypadConfig } from './types';
 
 /**
  *
@@ -88,6 +88,7 @@ export default class Keypad {
     const backspaceBtn = document.createElement('button');
     backspaceBtn.classList.add('keypad__backspace-btn');
     backspaceBtn.setAttribute('aria-label', 'Backspace button');
+    backspaceBtn.disabled = true;
 
     // append backspace icon
     backspaceBtn.appendChild(this.getMaterialIcon('backspace'));
@@ -96,6 +97,17 @@ export default class Keypad {
     backspaceBtn.addEventListener('click', this.config.onClearBtnClick);
 
     return backspaceBtn;
+  }
+
+  /**
+   *
+   * To get backspace button element for dom manipulations
+   *
+   */
+  get backspaceButtonElement(): HTMLButtonElement {
+    return this.querySelector.querySelector(
+      '.keypad__backspace-btn'
+    ) as HTMLButtonElement;
   }
 
   /**
@@ -125,5 +137,23 @@ export default class Keypad {
    */
   build(parentElement: HTMLElement) {
     parentElement.appendChild(this.skeleton);
+  }
+
+  /**
+   *
+   * Enable backspace button
+   *
+   */
+  enableBackspaceButton() {
+    this.backspaceButtonElement.disabled = false;
+  }
+
+  /**
+   *
+   * Disable backspace button
+   *
+   */
+  disableBackspaceButton() {
+    this.backspaceButtonElement.disabled = true;
   }
 }

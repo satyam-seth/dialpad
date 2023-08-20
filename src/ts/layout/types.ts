@@ -2,7 +2,7 @@ import { DialpadButtonClickHandler } from '../components/buttons/type';
 
 /**
  *
- * config for keypad
+ * Config for keypad
  *
  */
 export interface KeypadConfig {

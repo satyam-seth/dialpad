@@ -1,4 +1,4 @@
-import { KeypadButtonData } from './type';
+import { KeypadButtonData } from './types';
 
 /**
  *

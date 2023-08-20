@@ -40,9 +40,11 @@ export default class InputElement {
   private get skeleton(): HTMLInputElement {
     const input = document.createElement('input');
     input.className = this.className;
+    input.name = 'number';
+    input.type = 'text';
     input.autofocus = true;
     input.inputMode = 'none';
-    input.type = 'text';
+    input.autocomplete = 'off';
     return input;
   }
 

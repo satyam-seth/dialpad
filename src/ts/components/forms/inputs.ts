@@ -210,10 +210,36 @@ export default class InputElement {
 
   /**
    *
+   * Remove unwanted symbols and allow only digits, +, *, and #
+   *
+   */
+  validation() {
+    // prepare updated state
+    const caretPositionBeforeRemoveUnwantedChars = this.caretPosition;
+    const updatedValueAfterRemoveUnwantedChars = this.value.replace(
+      /[^0-9+*#]/g,
+      ''
+    );
+    const updatedCaretPosition =
+      caretPositionBeforeRemoveUnwantedChars +
+      updatedValueAfterRemoveUnwantedChars.length -
+      this.value.length;
+
+    // update state
+    this.value = updatedValueAfterRemoveUnwantedChars;
+    this.caretPosition = updatedCaretPosition;
+  }
+
+  /**
+   *
    * `input` event handler
    *
    */
   inputEventHandler() {
+    // Remove unwanted symbols and allow only digits, +, *, and #
+    this.validation();
+
+    // check whether the value is empty or not, and act accordingly.
     if (this.value === '') {
       // eslint-disable-next-line no-console
       console.log('value empty');

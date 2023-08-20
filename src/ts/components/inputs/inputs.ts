@@ -24,7 +24,7 @@ export default class InputElement {
    */
   static get instance() {
     // if singleton instance is not initialized yet,
-    // create new instance assign to singleton instabce
+    // create new instance assign to singleton instance
     if (!InputElement.singletonInstance) {
       InputElement.singletonInstance = new InputElement();
     }
@@ -41,6 +41,7 @@ export default class InputElement {
     const input = document.createElement('input');
     input.className = this.className;
     input.autofocus = true;
+    input.inputMode = 'none';
     input.type = 'text';
     return input;
   }

@@ -107,6 +107,8 @@ export default class Dialpad {
           // eslint-disable-next-line no-console
           console.log('fill last call on number in input field value');
           this.inputField.value = this.recentCallOnNumber;
+          this.inputField.focus();
+          this.keypad.enableBackspaceButton();
         } else {
           // update last call on number
           this.recentCallOnNumber = this.inputField.value;

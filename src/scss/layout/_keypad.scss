@@ -2,7 +2,7 @@
   display: grid;
   gap: 1.5rem 2rem;
   place-items: center;
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr) auto;
   grid-template-columns: repeat(3, 1fr);
 
   &__call-btn {

@@ -15,4 +15,11 @@ section.dialpad {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  .copyright-text {
+    font-size: 1.25rem;
+    font-weight: 900;
+
+    @include engrave;
+  }
 }

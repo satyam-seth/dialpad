@@ -47,6 +47,9 @@ export default class Dialpad {
     // build keypad layout
     this.keypadLayout.build(dialpad);
 
+    // append copyright text
+    dialpad.appendChild(this.copyrightText);
+
     return dialpad;
   }
 
@@ -138,6 +141,21 @@ export default class Dialpad {
     });
 
     return this.keypad;
+  }
+
+  /**
+   *
+   * append copyright text element
+   *
+   */
+  // eslint-disable-next-line class-methods-use-this
+  get copyrightText(): HTMLParagraphElement {
+    // create copyright text
+    const copyrightTextElement = document.createElement('p');
+    copyrightTextElement.className = 'copyright-text';
+    copyrightTextElement.innerText = `Made by • Satyam Seth Ⓒ ${new Date().getFullYear()}`;
+
+    return copyrightTextElement;
   }
 
   /**

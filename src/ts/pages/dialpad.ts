@@ -95,6 +95,10 @@ export default class Dialpad {
         // insert zero button subtitle value `+`
         this.inputField.replaceValue(value);
       },
+      onZeroBtnLongPressCancel: () => {
+        // focus input field
+        this.inputField.focus();
+      },
       onCallBtnClick: () => {
         // eslint-disable-next-line no-console
         console.log('clicked on call button');

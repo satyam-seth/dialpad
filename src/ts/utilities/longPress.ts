@@ -84,6 +84,11 @@ export default class LongPressEvent {
     console.log('Stop Pressing');
     this.isHeld = false;
 
+    // call on press start handler
+    if (this.config.onLongPressCancel) {
+      this.config.onLongPressCancel();
+    }
+
     if (this.activeHoldTimeoutId !== null) {
       window.clearTimeout(this.activeHoldTimeoutId);
       this.activeHoldTimeoutId = null;

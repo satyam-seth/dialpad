@@ -9,6 +9,9 @@ export type DialpadButtonClickHandler = (value: string) => void;
 // eslint-disable-next-line no-unused-vars
 export type DialpadButtonLongPressHandler = (value: string) => void;
 
+// eslint-disable-next-line no-unused-vars
+export type DialpadButtonLongPressCancelHandler = () => void;
+
 /**
  *
  * Config for dialpad button
@@ -32,4 +35,7 @@ export default interface DialpadButtonConfig {
 
   // button long press handler
   onLongPress?: DialpadButtonLongPressHandler;
+
+  // button long press handler
+  onLongPressCancel?: DialpadButtonLongPressCancelHandler;
 }

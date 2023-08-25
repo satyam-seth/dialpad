@@ -12,4 +12,7 @@ export default interface LongPressEventConfig {
 
   // on press start handler - (on click)
   onPressStart?: Function;
+
+  // on press end handler - (after click)
+  onLongPressCancel?: Function;
 }

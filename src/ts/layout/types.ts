@@ -1,5 +1,6 @@
 import {
   DialpadButtonClickHandler,
+  DialpadButtonLongPressCancelHandler,
   DialpadButtonLongPressHandler,
 } from '../components/buttons/type';
 
@@ -27,6 +28,8 @@ export interface KeypadConfig {
 
   // on backspace button long press handler
   onBackspaceBtnLongPress: () => void;
+
+  onZeroBtnLongPressCancel: DialpadButtonLongPressCancelHandler;
 }
 
 /**

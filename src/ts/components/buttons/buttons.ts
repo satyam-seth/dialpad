@@ -51,6 +51,7 @@ export default class DialpadButton {
         onPressStart: () => {
           this.config.onClick(this.config.title);
         },
+        onLongPressCancel: this.config.onLongPressCancel,
       });
     } else {
       // add click event listener

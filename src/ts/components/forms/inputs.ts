@@ -211,6 +211,7 @@ export default class InputElement {
   replaceValue(value: string) {
     this.removeValue();
     this.insertValue(value);
+    this.inputEventHandler();
   }
 
   /**

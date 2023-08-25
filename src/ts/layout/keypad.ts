@@ -42,6 +42,10 @@ export default class Keypad {
         onClick: this.config.onKeypadBtnClick,
         onLongPress:
           config.title === '0' ? this.config.onZeroBtnLongPress : undefined,
+        onLongPressCancel:
+          config.title === '0'
+            ? this.config.onZeroBtnLongPressCancel
+            : undefined,
       });
 
       // append button

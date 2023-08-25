@@ -6,25 +6,31 @@
   grid-template-columns: repeat(3, 1fr);
 
   &__call-btn {
-    background-color: #5bc236;
-
-    @include rounded;
-
     .material-symbols-outlined {
-      color: white;
       font-size: 2.5rem;
+    }
+
+    &:hover {
+      color: #5bc236;
+    }
+
+    &:active {
+      @include btn-active-text-shadow(green);
     }
   }
 
   &__backspace-btn {
-    border: 0;
-    background-color: transparent;
-
-    @include rounded;
-
     .material-symbols-outlined {
-      color: white;
       font-size: 3rem;
+    }
+
+    &:hover {
+      color: #9baacf;
+    }
+
+    &:active {
+      transform: scale(0.75);
+      @include btn-active-text-shadow(#ff4c00);
     }
 
     &:disabled {

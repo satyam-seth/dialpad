@@ -26,7 +26,7 @@ body {
   width: 100%;
   height: 100dvh;
   color: whitesmoke;
-  background-color: #151515;
+  background-color: #e0e5ec;
 }
 
 /**
@@ -41,4 +41,8 @@ a {
  */
 button {
   cursor: pointer;
+  border: 0;
+  outline: none;
+  border-style: none;
+  color: transparent;
 }

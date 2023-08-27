@@ -17,6 +17,14 @@
     &:active {
       @include btn-active-text-shadow(green);
     }
+
+    @media only screen and (max-width: 600px) {
+      .material-symbols-outlined {
+        font-size: 1.5rem;
+      }
+
+      @include rounded(4rem);
+    }
   }
 
   &__backspace-btn {
@@ -35,6 +43,14 @@
 
     &:disabled {
       display: none;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .material-symbols-outlined {
+        font-size: 2rem;
+      }
+
+      @include rounded(4rem);
     }
   }
 }

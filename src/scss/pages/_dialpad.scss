@@ -19,7 +19,16 @@ section.dialpad {
   .copyright-text {
     font-size: 1.25rem;
     font-weight: 900;
+    user-select: none;
 
     @include engrave;
+  }
+
+  @media only screen and (max-width: 600px) {
+    gap: 1.25rem;
+
+    .copyright-text {
+      font-size: 1rem;
+    }
   }
 }

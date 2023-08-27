@@ -12,9 +12,9 @@
   outline: none;
   border: 0;
   font-size: 2rem;
+  border-radius: 1rem;
   caret-color: red;
   background-color: gray;
-  border-radius: 1rem;
   box-shadow:
     inset 0.2rem 0.2rem 0.5rem rgba(195, 193, 198, 0.9),
     inset -0.2rem -0.2rem 0.5rem #ffffff;
@@ -24,5 +24,11 @@
   &::selection {
     color: #ff7025;
     background-color: rgba(255, 77, 0, 0.1);
+  }
+
+  @media only screen and (max-width: 600px) {
+    font-size: 1.3rem;
+    border-radius: 0.75rem;
+    padding: 0.35rem 0.5rem;
   }
 }

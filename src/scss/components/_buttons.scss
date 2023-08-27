@@ -1,5 +1,6 @@
 // button style
 button {
+  user-select: none;
   background-color: #e0e5ec;
   box-shadow:
     inset 0.2rem 0.2rem 0.5rem #fff,
@@ -71,6 +72,19 @@ button {
     .dialpad-btn__subtitle {
       transform: scale(0.95);
       @include btn-active-text-shadow(#ff7025);
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    gap: 0.125em;
+    @include rounded(4rem);
+
+    &__title {
+      font-size: 1.25rem;
+    }
+
+    &__subtitle {
+      font-size: 0.5rem;
     }
   }
 }

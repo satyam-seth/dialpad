@@ -2,7 +2,7 @@
 
 A dialpad build using ts and scss
 
-## [Mocha Setup](https://github.com/satyam-seth/dialpad/pull/53)
+## [Mocha Test Runner Setup](https://github.com/satyam-seth/dialpad/pull/53)
 
 - [mocha npm package](https://www.npmjs.com/package/mocha)
 - [mocha types npm package](https://www.npmjs.com/package/@types/mocha)

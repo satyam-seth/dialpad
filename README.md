@@ -20,3 +20,7 @@ A dialpad build using ts and scss
 
 - [jsdom npm package](https://www.npmjs.com/package/jsdom)
 - [jsdom-global npm package](https://www.npmjs.com/package/jsdom-global)
+
+## [NYC Test Coverage Setup](https://github.com/satyam-seth/dialpad/pull/59)
+
+- [nyc npm package](https://www.npmjs.com/package/nyc)

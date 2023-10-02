@@ -83,10 +83,10 @@ export default class InputElement {
 
   /**
    *
-   * Get input element caret position
+   * Get input element selection start position
    *
    */
-  get caretPosition(): number {
+  get selectionStartPosition(): number {
     // make sure the input is focused
     this.makeSureFocused();
     return this.querySelector.selectionStart!;
@@ -94,12 +94,23 @@ export default class InputElement {
 
   /**
    *
-   * Set input element caret position
+   * Get input element caret end position
+   *
+   */
+  get selectionEndPosition(): number {
+    // make sure the input is focused
+    this.makeSureFocused();
+    return this.querySelector.selectionEnd!;
+  }
+
+  /**
+   *
+   * Set input element selection start and end positions
    *
    * @param position - desired caret position index value
    *
    */
-  set caretPosition(position: number) {
+  set selectionPosition(position: number) {
     // make sure the input is focused
     this.makeSureFocused();
 
@@ -157,18 +168,32 @@ export default class InputElement {
   insertValue(value: string) {
     // capture current state
     const currentValue = this.value;
-    const currentCaretPosition = this.caretPosition;
+    const { selectionStartPosition, selectionEndPosition } = this;
 
     // prepare updated state
-    const updatedValue =
-      currentValue.slice(0, currentCaretPosition) +
-      value +
-      currentValue.slice(currentCaretPosition);
-    const updatedCaretPosition = currentCaretPosition + value.length;
+    let updatedValue;
+
+    if (selectionStartPosition !== selectionEndPosition) {
+      //  if input selection start value is not equal to selection end position
+      //  it means input value is selected, in this case remove selected value
+      //  and insert new value at the selection start (caret) position
+      updatedValue =
+        currentValue.slice(0, selectionStartPosition) +
+        value +
+        currentValue.slice(selectionEndPosition);
+    } else {
+      // else input selection start value is same as selection end value
+      //  insert new value at selection  start (caret) position
+      updatedValue =
+        currentValue.slice(0, selectionStartPosition) +
+        value +
+        currentValue.slice(selectionStartPosition);
+    }
+    const updatedCaretPosition = selectionStartPosition + value.length;
 
     // update state
     this.value = updatedValue;
-    this.caretPosition = updatedCaretPosition;
+    this.selectionPosition = updatedCaretPosition;
   }
 
   /**
@@ -181,7 +206,7 @@ export default class InputElement {
   removeValue(count: number = 1) {
     // capture current state
     const currentValue = this.value;
-    const currentCaretPosition = this.caretPosition;
+    const currentCaretPosition = this.selectionStartPosition;
 
     // prepare updated state
     const beforeCaretValue = currentValue.slice(0, currentCaretPosition);
@@ -196,7 +221,7 @@ export default class InputElement {
 
       // update state
       this.value = updatedValue;
-      this.caretPosition = updatedCaretPosition;
+      this.selectionPosition = updatedCaretPosition;
 
       // check empty or not
       this.inputEventHandler();
@@ -231,7 +256,7 @@ export default class InputElement {
    */
   validation() {
     // prepare updated state
-    const caretPositionBeforeRemoveUnwantedChars = this.caretPosition;
+    const caretPositionBeforeRemoveUnwantedChars = this.selectionStartPosition;
     const updatedValueAfterRemoveUnwantedChars = this.value.replace(
       /[^0-9+*#]/g,
       ''
@@ -243,7 +268,7 @@ export default class InputElement {
 
     // update state
     this.value = updatedValueAfterRemoveUnwantedChars;
-    this.caretPosition = updatedCaretPosition;
+    this.selectionPosition = updatedCaretPosition;
   }
 
   /**

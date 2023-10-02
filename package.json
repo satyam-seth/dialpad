@@ -12,7 +12,8 @@
     "format": "prettier --write src/ts/**/*.ts",
     "lint": "eslint src/**/*.ts",
     "lint-fix": "eslint src/**/*.ts --fix",
-    "lint-scss": "sass-lint src/**/*.scss"
+    "lint-scss": "sass-lint src/**/*.scss",
+    "test": "mocha"
   },
   "keywords": [],
   "author": "",

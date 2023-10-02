@@ -11,9 +11,10 @@
     "dev": "gulp && gulp watch",
     "format": "prettier --write src/ts/**/*.ts",
     "lint": "eslint src/**/*.ts",
-    "lint-fix": "eslint src/**/*.ts --fix",
+    "lint:fix": "eslint src/**/*.ts --fix",
     "lint-scss": "sass-lint src/**/*.scss",
-    "test": "mocha"
+    "test:unit": "mocha",
+    "test:coverage": "nyc npm run test:unit"
   },
   "keywords": [],
   "author": "",

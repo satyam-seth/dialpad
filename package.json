@@ -13,7 +13,8 @@
     "lint": "eslint src/**/*.ts",
     "lint-fix": "eslint src/**/*.ts --fix",
     "lint-scss": "sass-lint src/**/*.scss",
-    "test": "mocha"
+    "test:unit": "mocha",
+    "test:coverage": "nyc npm run test:unit"
   },
   "keywords": [],
   "author": "",
@@ -40,6 +41,7 @@
     "jsdom": "^22.1.0",
     "jsdom-global": "^3.0.2",
     "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
     "prettier": "^3.0.1",
     "sass": "^1.65.1",
     "sass-lint": "^1.13.1",

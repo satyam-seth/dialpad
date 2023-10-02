@@ -1,2 +1,3 @@
 node_modules/
+# Skip ignoring this file because it is required for GitHub Pages to work.
 # dist/

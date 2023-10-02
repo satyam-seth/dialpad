@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: 'Lint 🧮 and Build ⚒️'
+    name: 'Lint 🧮, Test 🧪 and Build ⚒️'
     runs-on: ubuntu-latest
 
     steps:
@@ -28,6 +28,9 @@ jobs:
 
       - name: 'Run scss lint'
         run: npm run lint-scss
+
+      - name: 'Run coverage unit test'
+        run: npm run test:coverage
 
       - name: 'Run build'
         run: npm run build

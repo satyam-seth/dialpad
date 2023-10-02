@@ -15,3 +15,8 @@ A dialpad build using ts and scss
 
 - [chai npm package](https://www.npmjs.com/package/chai)
 - [chai types npm package](https://www.npmjs.com/package/@types/chai)
+
+## [jsdom Setup](https://github.com/satyam-seth/dialpad/pull/57)
+
+- [jsdom npm package](https://www.npmjs.com/package/jsdom)
+- [jsdom-global npm package](https://www.npmjs.com/package/jsdom-global)

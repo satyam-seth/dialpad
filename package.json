@@ -22,6 +22,7 @@
   "devDependencies": {
     "@types/chai": "^4.3.6",
     "@types/mocha": "^10.0.2",
+    "@types/sinon": "^10.0.18",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
     "@typescript-eslint/parser": "^6.4.0",
     "babel-core": "^6.26.3",
@@ -45,6 +46,7 @@
     "prettier": "^3.0.1",
     "sass": "^1.65.1",
     "sass-lint": "^1.13.1",
+    "sinon": "^16.0.0",
     "ts-node": "^10.9.1",
     "tsify": "^5.0.4",
     "typescript": "^5.1.6",

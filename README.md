@@ -24,3 +24,8 @@ A dialpad build using ts and scss
 ## [NYC Test Coverage Setup](https://github.com/satyam-seth/dialpad/pull/59)
 
 - [nyc npm package](https://www.npmjs.com/package/nyc)
+
+## [sinon Setup](https://github.com/satyam-seth/dialpad/pull/71)
+
+- [sinon npm package](https://www.npmjs.com/package/sinon)
+- [sinon types npm package](https://www.npmjs.com/package/@types/sinon)

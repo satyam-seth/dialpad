@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import { after, before, describe, it } from 'mocha';
+import sinon from 'sinon';
 
 const jsdom = require('jsdom-global');
 
@@ -24,5 +25,17 @@ describe('dummy test for jsdom', () => {
   it('test dom', () => {
     const paragraph = document.querySelector('p')!;
     expect(paragraph.innerHTML).to.equal('Hello world');
+  });
+
+  it('test spy using sinon', () => {
+    // Create a spy for document.querySelector
+    const querySelectorSpy = sinon.spy(document, 'querySelector');
+
+    // Call querySelector
+    document.querySelector('body');
+
+    // Assert that querySelector called Once
+    // eslint-disable-next-line no-unused-expressions
+    expect(querySelectorSpy.calledOnce).to.be.true;
   });
 });

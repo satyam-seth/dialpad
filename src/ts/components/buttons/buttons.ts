@@ -29,7 +29,7 @@ export default class DialpadButton {
    * Dialpad button skeleton
    *
    */
-  private get skeleton(): HTMLButtonElement {
+  get skeleton(): HTMLButtonElement {
     const button = document.createElement('button');
     button.id = this.id;
     button.classList.add('dialpad-btn');
@@ -68,7 +68,7 @@ export default class DialpadButton {
    * Dialpad button tile element
    *
    */
-  private get titleElement(): HTMLElement {
+  get titleElement(): HTMLElement {
     const title = document.createElement('h1');
     title.classList.add('dialpad-btn__title');
     title.innerText = this.config.title;

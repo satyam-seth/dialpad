@@ -20,6 +20,7 @@ describe('Test Dialpad Button', () => {
       namespace: 'test-namespace',
       ariaLabel: 'test-label',
       title: 'test-title',
+      subtitle: 'test-subtitle',
       onClick(value: string): void {
         console.log(value);
       },
@@ -83,6 +84,26 @@ describe('Test Dialpad Button', () => {
 
     // Assert that the title element has the correct inner text
     expect(titleElement.innerText).to.be.equal('test-title');
+  });
+
+  it('subtitleElement should return correct html element', () => {
+    // Create DialpadButton instance
+    const button = new DialpadButton(validConfig);
+
+    // Access subtitle element
+    const { subtitleElement } = button;
+
+    // Assert that the subtitle element is an HTMLElement
+    expect(subtitleElement).to.be.instanceOf(HTMLElement);
+
+    // Assert that the subtitle element has the correct tag name
+    expect(subtitleElement.tagName).to.be.equal('P');
+
+    // Assert that the subtitle element has the correct class name
+    expect(subtitleElement.className).to.be.equal('dialpad-btn__subtitle');
+
+    // Assert that the subtitle element has the correct inner text
+    expect(subtitleElement.innerText).to.be.equal('test-subtitle');
   });
 
   it('build should append skeleton to parentElement', () => {

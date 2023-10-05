@@ -80,7 +80,7 @@ export default class DialpadButton {
    * Dialpad button subtile
    *
    */
-  private get subtitleElement(): HTMLElement {
+  get subtitleElement(): HTMLElement {
     const subtitle = document.createElement('p');
     subtitle.classList.add('dialpad-btn__subtitle');
     subtitle.innerText = this.config.subtitle ?? '';

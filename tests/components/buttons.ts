@@ -49,4 +49,11 @@ describe('Test Dialpad Button', () => {
   it('should not throw an error for valid config', () => {
     expect(() => new DialpadButton(validConfig)).to.not.throw();
   });
+
+  it('should throw an error for invalid config', () => {
+    expect(() => new DialpadButton(invalidConfig)).to.throw(
+      Error,
+      'Invalid config for dialPad button'
+    );
+  });
 });

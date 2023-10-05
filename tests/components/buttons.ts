@@ -56,4 +56,12 @@ describe('Test Dialpad Button', () => {
       'Invalid config for dialPad button'
     );
   });
+
+  it('should has correct id', () => {
+    // Create DialpadButton instance
+    const button = new DialpadButton(validConfig);
+
+    // Assert that id is correct
+    expect(button.id).to.equal(`dialpad-btn-test-namespace`);
+  });
 });

@@ -64,4 +64,24 @@ describe('Test Dialpad Button', () => {
     // Assert that id is correct
     expect(button.id).to.equal(`dialpad-btn-test-namespace`);
   });
+
+  it('titleElement should return correct html element', () => {
+    // Create DialpadButton instance
+    const button = new DialpadButton(validConfig);
+
+    // Access title element
+    const { titleElement } = button;
+
+    // Assert that the title element is an HTMLElement
+    expect(titleElement).to.be.instanceOf(HTMLElement);
+
+    // Assert that the title element has the correct tag name
+    expect(titleElement.tagName).to.be.equal('H1');
+
+    // Assert that the title element has the correct class name
+    expect(titleElement.className).to.be.equal('dialpad-btn__title');
+
+    // Assert that the title element has the correct inner text
+    expect(titleElement.innerText).to.be.equal('test-title');
+  });
 });

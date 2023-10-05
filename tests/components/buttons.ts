@@ -84,4 +84,28 @@ describe('Test Dialpad Button', () => {
     // Assert that the title element has the correct inner text
     expect(titleElement.innerText).to.be.equal('test-title');
   });
+
+  it('build should append skeleton to parentElement', () => {
+    // Create DialpadButton instance
+    const button = new DialpadButton(validConfig);
+
+    // Create spy for skeleton getter
+    const skeletonGetterSpy = sinon.spy(button, 'skeleton', ['get']);
+
+    // Create spy for appendChild method
+    const appendChildSpy = sinon.spy(document.body, 'appendChild');
+
+    // Call the build method
+    button.build(document.body);
+
+    // Assert that the getter was accessed
+    expect(skeletonGetterSpy.get.calledOnce).to.be.true;
+
+    // Assert that the parentElement appendChild was called once with the correct argument
+    expect(appendChildSpy.calledOnceWith(sinon.match.instanceOf(HTMLElement)))
+      .to.be.true;
+
+    // Assert that the parentElement now contains the button skeleton
+    expect(button.querySelector).to.exist;
+  });
 });

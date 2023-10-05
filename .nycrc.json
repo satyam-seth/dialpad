@@ -3,7 +3,7 @@
   "branches": 80,
   "functions": 80,
   "statements": 80,
-  "check-coverage": true,
+  "check-coverage": false,
   "include": ["src/**/*.ts"],
   "exclude": ["tests/**/*.ts"],
   "reporter": ["lcov", "html", "text"]

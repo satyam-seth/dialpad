@@ -106,6 +106,32 @@ describe('Test Dialpad Button', () => {
     expect(subtitleElement.innerText).to.be.equal('test-subtitle');
   });
 
+  it('querySelector should retrieve button HTMLElement', () => {
+    // Create DialpadButton
+    const button = new DialpadButton(validConfig);
+
+    //
+    const buttonId = `dialpad-btn-${validConfig.namespace}`;
+
+    // Create spy for document getElementById
+    const getElementByIdSpy = sinon.spy(document, 'getElementById');
+
+    // Call the build method
+    button.build(document.body);
+
+    // Call querySelector
+    const result = button.querySelector;
+
+    // Assert that getElementById call with expected id
+    expect(getElementByIdSpy.calledOnceWith(buttonId)).to.be.true;
+
+    // Assert that the result is an HTMLButtonElement
+    expect(result).to.be.an.instanceOf(HTMLButtonElement);
+
+    // Assert that result HTMLElement has expected id
+    expect(result.id).to.equal(buttonId);
+  });
+
   it('build should append skeleton to parentElement', () => {
     // Create DialpadButton instance
     const button = new DialpadButton(validConfig);

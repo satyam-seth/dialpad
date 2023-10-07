@@ -106,11 +106,54 @@ describe('Test Dialpad Button', () => {
     expect(subtitleElement.innerText).to.be.equal('test-subtitle');
   });
 
+  it('skeleton should return correct html element', () => {
+    // Create DialpadButton instance
+    const button = new DialpadButton(validConfig);
+
+    // Create spy for titleElement getter
+    const titleElementSpy = sinon.spy(button, 'titleElement', ['get']);
+
+    // Create spy for subtitleElement getter
+    const subtitleElementSpy = sinon.spy(button, 'subtitleElement', ['get']);
+
+    // Access skeleton
+    const { skeleton } = button;
+
+    // Assert that the skeleton is an HTMLElement
+    expect(skeleton).to.be.instanceOf(HTMLButtonElement);
+
+    // Assert that the skeleton has the correct tag name
+    expect(skeleton.tagName).to.be.equal('BUTTON');
+
+    // Assert that the skeleton has the correct class name
+    expect(skeleton.className).to.be.equal('dialpad-btn');
+
+    // Assert that the skeleton has the correct area-label attribute
+    expect(skeleton.getAttribute('aria-label')).to.be.equal(
+      validConfig.ariaLabel
+    );
+
+    // Assert that the titleElement getter was accessed
+    expect(titleElementSpy.get.calledOnce).to.be.true;
+
+    // Assert that the subtitleElement getter was accessed
+    expect(subtitleElementSpy.get.calledOnce).to.be.true;
+
+    // Assert that tileElement and subtitleElement appended expected in order
+    sinon.assert.callOrder(titleElementSpy.get, subtitleElementSpy.get);
+
+    // Assert that titleElement is appended in skeleton
+    expect(skeleton.querySelector('.dialpad-btn__title')).to.exist;
+
+    // Assert that subtitleElement is appended in skeleton
+    expect(skeleton.querySelector('.dialpad-btn__subtitle')).to.exist;
+  });
+
   it('querySelector should retrieve button HTMLElement', () => {
     // Create DialpadButton
     const button = new DialpadButton(validConfig);
 
-    //
+    // Expected button id
     const buttonId = `dialpad-btn-${validConfig.namespace}`;
 
     // Create spy for document getElementById
@@ -145,7 +188,7 @@ describe('Test Dialpad Button', () => {
     // Call the build method
     button.build(document.body);
 
-    // Assert that the getter was accessed
+    // Assert that the skeleton getter was accessed
     expect(skeletonGetterSpy.get.calledOnce).to.be.true;
 
     // Assert that the parentElement appendChild was called once with the correct argument

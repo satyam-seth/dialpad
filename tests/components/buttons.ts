@@ -197,7 +197,7 @@ describe('Test Dialpad Button', () => {
     // Create DialpadButton instance
     const button = new DialpadButton(config);
 
-    // Create buttonElement
+    // Create a button element
     const btn = document.createElement('button');
 
     // Create a spy on addClickEventListener
@@ -208,6 +208,36 @@ describe('Test Dialpad Button', () => {
 
     // Assert that addClickEventListener called once with expected button element
     expect(addClickEventListenerSpy.calledOnceWithExactly(btn)).to.be.true;
+  });
+
+  it('addClickEventListener should add a click event listener and call onClick handler', () => {
+    // Create a stub for the onClick handler
+    const onClickStub = sinon.stub();
+
+    // Define a mock config for your object
+    const config = {
+      namespace: 'Test',
+      subtitle: 'Subtitle',
+      onClick: onClickStub,
+      title: 'Title',
+      ariaLabel: 'Aria Label',
+    };
+
+    // Create DialpadButton instance
+    const button = new DialpadButton(config);
+
+    // Create a button element
+    const btn = document.createElement('button');
+
+    // Call the addClickEventListener method
+    button.addClickEventListener(btn);
+
+    // Simulate a click event on the button
+    const clickEvent = new Event('click');
+    btn.dispatchEvent(clickEvent);
+
+    // Ensure onClick handler was called once with config title
+    expect(onClickStub.calledOnceWithExactly(config.title)).to.be.true;
   });
 
   it('querySelector should retrieve button HTMLElement', () => {

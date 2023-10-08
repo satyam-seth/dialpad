@@ -183,6 +183,33 @@ describe('Test Dialpad Button', () => {
     expect(applyLongPressEventSpy.calledOnceWithExactly(btn)).to.be.true;
   });
 
+  it('configureButtonEvents should called addClickEventListener on button if config.onLongPress is not exists', () => {
+    // Define a mock config for your object
+    const config = {
+      namespace: 'Test',
+      subtitle: 'Subtitle',
+      onClick: sinon.stub(),
+      title: 'Title',
+      ariaLabel: 'Aria Label',
+      onLongPressCancel: sinon.stub(),
+    };
+
+    // Create DialpadButton instance
+    const button = new DialpadButton(config);
+
+    // Create buttonElement
+    const btn = document.createElement('button');
+
+    // Create a spy on addClickEventListener
+    const addClickEventListenerSpy = sinon.spy(button, 'addClickEventListener');
+
+    // Call configureButtonEvents for button element
+    button.configureButtonEvents(btn);
+
+    // Assert that addClickEventListener called once with expected button element
+    expect(addClickEventListenerSpy.calledOnceWithExactly(btn)).to.be.true;
+  });
+
   it('querySelector should retrieve button HTMLElement', () => {
     // Create DialpadButton
     const button = new DialpadButton(validConfig);

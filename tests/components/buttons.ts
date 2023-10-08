@@ -116,6 +116,9 @@ describe('Test Dialpad Button', () => {
     // Create spy for subtitleElement getter
     const subtitleElementSpy = sinon.spy(button, 'subtitleElement', ['get']);
 
+    // Create spy for configureButtonEvents
+    const configureButtonEventsSpy = sinon.spy(button, 'configureButtonEvents');
+
     // Access skeleton
     const { skeleton } = button;
 
@@ -138,6 +141,9 @@ describe('Test Dialpad Button', () => {
 
     // Assert that the subtitleElement getter was accessed
     expect(subtitleElementSpy.get.calledOnce).to.be.true;
+
+    // Assert that the configureButtonEvents called once with button skeleton
+    expect(configureButtonEventsSpy.calledOnceWithExactly(skeleton)).to.be.true;
 
     // Assert that tileElement and subtitleElement appended expected in order
     sinon.assert.callOrder(titleElementSpy.get, subtitleElementSpy.get);

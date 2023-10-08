@@ -5,6 +5,7 @@ import { afterEach, beforeEach, describe, it } from 'mocha';
 import sinon from 'sinon';
 import DialpadButton from '../../src/ts/components/buttons/buttons';
 import DialpadButtonConfig from '../../src/ts/components/buttons/type';
+import LongPressEvent from '../../src/ts/utilities/longPress';
 
 const jsdom = require('jsdom-global');
 
@@ -238,6 +239,58 @@ describe('Test Dialpad Button', () => {
 
     // Ensure onClick handler was called once with config title
     expect(onClickStub.calledOnceWithExactly(config.title)).to.be.true;
+  });
+
+  it('applyLongPressEvent should apply long press event and call callbacks', () => {
+    // Create a stub for the onLongPress callbacks
+    const onLongPressStub = sinon.stub();
+
+    // Create a stub for the onClick callbacks
+    const onClickStub = sinon.stub();
+
+    // Create a stub for the onLongPressCancel callbacks
+    const onLongPressCancelStub = sinon.stub();
+
+    // Define a mock config for your object
+    const config = {
+      namespace: 'Test',
+      onLongPress: onLongPressStub,
+      subtitle: 'Subtitle',
+      onClick: onClickStub,
+      title: 'Title',
+      ariaLabel: 'Aria Label',
+      onLongPressCancel: onLongPressCancelStub,
+    };
+
+    // Create DialpadButton instance
+    const button = new DialpadButton(config);
+
+    // Create a button element
+    const btn = document.createElement('button');
+
+    // Create a spy on LongPressEvent.apply
+    const longPressEventApplySpy = sinon.spy(LongPressEvent, 'apply');
+
+    // Call the applyLongPressEvent method
+    button.applyLongPressEvent(btn);
+
+    // Ensure LongPressEvent.apply was called
+    expect(longPressEventApplySpy.calledOnce).to.be.true;
+
+    // Get the arguments of the first call
+    const args = longPressEventApplySpy.firstCall.args[0];
+
+    // Check that the target matches yourObject.skeleton
+    expect(args.target).to.equal(btn);
+
+    // Check the callback function
+    expect(args.onLongPressCallback).to.be.a('function');
+
+    // Check the start callback function
+    expect(args.onPressStart).to.be.a('function');
+
+    // Check the cancel callback function
+    expect(args.onLongPressCancel).to.be.a('function');
   });
 
   it('querySelector should retrieve button HTMLElement', () => {

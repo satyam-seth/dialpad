@@ -3,8 +3,8 @@
 import { expect } from 'chai';
 import { afterEach, beforeEach, describe, it } from 'mocha';
 import sinon from 'sinon';
-import DialpadButtonConfig from 'src/ts/components/buttons/type';
 import DialpadButton from '../../src/ts/components/buttons/buttons';
+import DialpadButtonConfig from '../../src/ts/components/buttons/type';
 
 const jsdom = require('jsdom-global');
 
@@ -153,6 +153,34 @@ describe('Test Dialpad Button', () => {
 
     // Assert that subtitleElement is appended in skeleton
     expect(skeleton.querySelector('.dialpad-btn__subtitle')).to.exist;
+  });
+
+  it('configureButtonEvents should apply LongPressEvent on button if config.onLongPress is exists', () => {
+    // Define a mock config for your object
+    const config = {
+      namespace: 'Test',
+      onLongPress: sinon.stub(),
+      subtitle: 'Subtitle',
+      onClick: sinon.stub(),
+      title: 'Title',
+      ariaLabel: 'Aria Label',
+      onLongPressCancel: sinon.stub(),
+    };
+
+    // Create DialpadButton instance
+    const button = new DialpadButton(config);
+
+    // Create buttonElement
+    const btn = document.createElement('button');
+
+    // Create a spy on applyLongPressEvent
+    const applyLongPressEventSpy = sinon.spy(button, 'applyLongPressEvent');
+
+    // Call configureButtonEvents for button element
+    button.configureButtonEvents(btn);
+
+    // Assert that applyLongPressEvent called once with expected button element
+    expect(applyLongPressEventSpy.calledOnceWithExactly(btn)).to.be.true;
   });
 
   it('querySelector should retrieve button HTMLElement', () => {

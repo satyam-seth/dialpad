@@ -103,7 +103,7 @@ export default class DialpadButton {
    * Dialpad button tile element
    *
    */
-  get titleElement(): HTMLElement {
+  get titleElement(): HTMLHeadingElement {
     const title = document.createElement('h1');
     title.classList.add('dialpad-btn__title');
     title.innerText = this.config.title;
@@ -115,7 +115,7 @@ export default class DialpadButton {
    * Dialpad button subtile
    *
    */
-  get subtitleElement(): HTMLElement {
+  get subtitleElement(): HTMLParagraphElement {
     const subtitle = document.createElement('p');
     subtitle.classList.add('dialpad-btn__subtitle');
     subtitle.innerText = this.config.subtitle ?? '';

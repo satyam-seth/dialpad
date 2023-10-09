@@ -29,7 +29,7 @@ export default class DialpadButton {
    * Dialpad button skeleton
    *
    */
-  private get skeleton(): HTMLButtonElement {
+  get skeleton(): HTMLButtonElement {
     const button = document.createElement('button');
     button.id = this.id;
     button.classList.add('dialpad-btn');
@@ -41,26 +41,61 @@ export default class DialpadButton {
     // append subtitle
     button.appendChild(this.subtitleElement);
 
-    // apply long press event
-    if (this.config.onLongPress !== undefined) {
-      LongPressEvent.apply({
-        target: button,
-        onLongPressCallback: () => {
-          this.config.onLongPress!(this.config.subtitle!);
-        },
-        onPressStart: () => {
-          this.config.onClick(this.config.title);
-        },
-        onLongPressCancel: this.config.onLongPressCancel,
-      });
-    } else {
-      // add click event listener
-      button.addEventListener('click', () => {
-        this.config.onClick(this.config.title);
-      });
-    }
+    // configure button events
+    this.configureButtonEvents(button);
 
     return button;
+  }
+
+  /**
+   *
+   * Apply long press event on button element
+   *
+   * @param button
+   *
+   */
+  applyLongPressEvent(button: HTMLButtonElement) {
+    LongPressEvent.apply({
+      target: button,
+      onLongPressCallback: () => {
+        this.config.onLongPress!(this.config.subtitle!);
+      },
+      onPressStart: () => {
+        this.config.onClick(this.config.title);
+      },
+      onLongPressCancel: this.config.onLongPressCancel,
+    });
+  }
+
+  /**
+   *
+   * Apply click event listener on button element
+   *
+   * @param button
+   *
+   */
+  addClickEventListener(button: HTMLButtonElement) {
+    button.addEventListener('click', () => {
+      this.config.onClick(this.config.title);
+    });
+  }
+
+  /**
+   *
+   * If onLongPress callback is exist in config apply long press event
+   * Else apply click event listener on button
+   *
+   * @param button
+   *
+   */
+  configureButtonEvents(button: HTMLButtonElement) {
+    if (this.config.onLongPress !== undefined) {
+      // apply long press event
+      this.applyLongPressEvent(button);
+    } else {
+      // add click event listener
+      this.addClickEventListener(button);
+    }
   }
 
   /**
@@ -68,7 +103,7 @@ export default class DialpadButton {
    * Dialpad button tile element
    *
    */
-  private get titleElement(): HTMLElement {
+  get titleElement(): HTMLHeadingElement {
     const title = document.createElement('h1');
     title.classList.add('dialpad-btn__title');
     title.innerText = this.config.title;
@@ -80,7 +115,7 @@ export default class DialpadButton {
    * Dialpad button subtile
    *
    */
-  private get subtitleElement(): HTMLElement {
+  get subtitleElement(): HTMLParagraphElement {
     const subtitle = document.createElement('p');
     subtitle.classList.add('dialpad-btn__subtitle');
     subtitle.innerText = this.config.subtitle ?? '';

@@ -20,7 +20,18 @@ describe('Test Input Element', () => {
   });
 
   it('should able to create object for valid config', () => {
-    const inputElement = new InputElement(config);
-    expect(inputElement).to.be.instanceOf(InputElement);
+    // Create InputElement instance
+    const input = new InputElement(config);
+
+    // Assert that input is instance of InputElement
+    expect(input).to.be.instanceOf(InputElement);
+  });
+
+  it('should has correct id', () => {
+    // Create InputElement instance
+    const input = new InputElement(config);
+
+    // Assert that id is correct
+    expect(input.id).to.equal(`input-test-namespace`);
   });
 });

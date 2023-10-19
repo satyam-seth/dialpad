@@ -75,4 +75,28 @@ describe('Test Input Element', () => {
     // Assert that result HTMLElement has expected id
     expect(result.id).to.equal(inputId);
   });
+
+  it('build should append skeleton to parentElement', () => {
+    // Create InputElement instance
+    const input = new InputElement(config);
+
+    // Create spy for skeleton getter
+    const skeletonGetterSpy = sinon.spy(input, 'skeleton', ['get']);
+
+    // Create spy for appendChild method
+    const appendChildSpy = sinon.spy(document.body, 'appendChild');
+
+    // Call the build method
+    input.build(document.body);
+
+    // Assert that the skeleton getter was accessed
+    expect(skeletonGetterSpy.get.calledOnce).to.be.true;
+
+    // Assert that the parentElement appendChild was called once with the correct argument
+    expect(appendChildSpy.calledOnceWith(sinon.match.instanceOf(HTMLElement)))
+      .to.be.true;
+
+    // Assert that the parentElement now contains the button skeleton
+    expect(input.querySelector).to.exist;
+  });
 });

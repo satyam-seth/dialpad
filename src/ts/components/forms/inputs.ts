@@ -23,7 +23,7 @@ export default class InputElement {
    * input element skeleton
    *
    */
-  private get skeleton(): HTMLInputElement {
+  get skeleton(): HTMLInputElement {
     const input = document.createElement('input');
     input.id = this.id;
     input.className = 'input-element';

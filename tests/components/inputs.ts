@@ -1,13 +1,20 @@
 /* eslint-disable no-console */
+/* eslint-disable no-unused-expressions */
 import { expect } from 'chai';
-import { beforeEach, describe, it } from 'mocha';
+import { afterEach, beforeEach, describe, it } from 'mocha';
+import sinon from 'sinon';
 import InputElement from '../../src/ts/components/forms/inputs';
 import { InputElementConfig } from '../../src/ts/components/forms/types';
 
+const jsdom = require('jsdom-global');
+
 describe('Test Input Element', () => {
   let config: InputElementConfig;
+  let cleanup: any;
 
   beforeEach(() => {
+    cleanup = jsdom();
+
     config = {
       namespace: 'test-namespace',
       onValueEmpty: () => {
@@ -17,6 +24,14 @@ describe('Test Input Element', () => {
         console.log('value non empty');
       },
     };
+  });
+
+  afterEach(() => {
+    // cleanup jsdom
+    cleanup();
+
+    // Restore the spies
+    sinon.restore();
   });
 
   it('should able to create object for valid config', () => {
@@ -33,5 +48,31 @@ describe('Test Input Element', () => {
 
     // Assert that id is correct
     expect(input.id).to.equal(`input-test-namespace`);
+  });
+
+  it('querySelector should retrieve button HTMLElement', () => {
+    // Create InputElement
+    const input = new InputElement(config);
+
+    // Expected input id
+    const inputId = `input-${config.namespace}`;
+
+    // Create spy for document getElementById
+    const getElementByIdSpy = sinon.spy(document, 'getElementById');
+
+    // Call the build method
+    input.build(document.body);
+
+    // Call querySelector
+    const result = input.querySelector;
+
+    // Assert that getElementById call with expected id
+    expect(getElementByIdSpy.calledOnceWith(inputId)).to.be.true;
+
+    // Assert that the result is an HTMLInputElement
+    expect(result).to.be.an.instanceOf(HTMLInputElement);
+
+    // Assert that result HTMLElement has expected id
+    expect(result.id).to.equal(inputId);
   });
 });

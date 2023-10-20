@@ -116,7 +116,9 @@ export default class Dialpad {
           this.inputField.value = this.recentCallOnNumber;
           this.inputField.focus();
           this.keypad.enableBackspaceButton();
-        } else {
+        }
+        // if value is not empty (or add check for valid phone number)
+        else if (this.inputField.value !== '') {
           // update last call on number
           this.recentCallOnNumber = this.inputField.value;
 

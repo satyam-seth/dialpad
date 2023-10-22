@@ -290,4 +290,37 @@ describe('Test Input Element', () => {
     // Assert that the focused returns false
     expect(input.querySelector.value).to.be.equal('hello');
   });
+
+  it('replaceValue should working correctly', () => {
+    // Create InputElement instance
+    const input = new InputElement(config);
+
+    // Create spy for removeValue
+    const removeValueSpy = sinon.spy(input, 'removeValue');
+
+    // Create spy for insertValue
+    const insertValueSpy = sinon.spy(input, 'insertValue');
+
+    // Create spy for inputEventHandler
+    const inputEventHandlerSpy = sinon.spy(input, 'inputEventHandler');
+
+    // build InputElement
+    input.build(document.body);
+
+    // Set input element value
+    input.querySelector.value = 'hello';
+
+    // Call replaceValue
+    input.replaceValue('bye');
+
+    // Assert that the removeValueSpy called once
+    expect(removeValueSpy.calledOnce).to.be.true;
+
+    // Assert that the insertValueSpy called once expected string value
+    expect(insertValueSpy.calledOnceWithExactly('bye')).to.be.true;
+
+    // Assert that the inputEventHandlerSpy called twice
+    // (first time for remove value and second time for replaceValue)
+    expect(inputEventHandlerSpy.calledTwice).to.be.true;
+  });
 });

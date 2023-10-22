@@ -141,4 +141,28 @@ describe('Test Input Element', () => {
     // Assert that the inputEventHandlerStub called once
     expect(inputEventHandlerStub.calledOnce).to.be.true;
   });
+
+  it('makeSureFocused should focus the element when not already focused', () => {
+    // Create InputElement instance
+    const input = new InputElement(config);
+
+    // Create spy for focus
+    const focusSpy = sinon.spy(input, 'focus');
+
+    // build InputElement
+    input.build(document.body);
+
+    // Call makeSureFocused to focus the element
+    input.makeSureFocused();
+
+    // Assert that focusSpy is called once
+    expect(focusSpy.calledOnce).to.be.true;
+
+    // Call makeSureFocused
+    input.makeSureFocused();
+
+    // Assert that focusSpy is not called twice
+    // but called once because the input element is already focused.
+    expect(focusSpy.calledOnce).to.be.true;
+  });
 });

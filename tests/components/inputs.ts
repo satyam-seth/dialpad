@@ -246,6 +246,23 @@ describe('Test Input Element', () => {
     expect(input.focused).to.be.false;
   });
 
+  it('focus should focus input element', () => {
+    // Create InputElement instance
+    const input = new InputElement(config);
+
+    // build InputElement
+    input.build(document.body);
+
+    // Assert InputElement is not focused before call focus
+    expect(input.focused).to.be.false;
+
+    // Call focus
+    input.focus();
+
+    // Assert InputElement is focused after call focus
+    expect(input.focused).to.be.true;
+  });
+
   it('value should return correct value', () => {
     // Create InputElement instance
     const input = new InputElement(config);

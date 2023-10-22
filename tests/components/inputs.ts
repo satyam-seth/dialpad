@@ -225,4 +225,24 @@ describe('Test Input Element', () => {
     // Assert the selection end position is correctly set
     expect(input.selectionEndPosition).to.equal(2);
   });
+
+  it('focused should return correct focus status', () => {
+    // Create InputElement instance
+    const input = new InputElement(config);
+
+    // build InputElement
+    input.build(document.body);
+
+    // Focus input element
+    input.querySelector.focus();
+
+    // Assert that the focused returns true
+    expect(input.focused).to.be.true;
+
+    // Blur input element
+    input.querySelector.blur();
+
+    // Assert that the focused returns false
+    expect(input.focused).to.be.false;
+  });
 });

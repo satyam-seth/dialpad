@@ -99,4 +99,46 @@ describe('Test Input Element', () => {
     // Assert that the parentElement now contains the button skeleton
     expect(input.querySelector).to.exist;
   });
+
+  it('skeleton should return correct html element', () => {
+    // Create InputElement instance
+    const input = new InputElement(config);
+
+    // Create stub for inputEventHandler
+    const inputEventHandlerStub = sinon.stub(input, 'inputEventHandler');
+
+    // Access skeleton
+    const { skeleton } = input;
+
+    // Assert that the skeleton is an HTMLElement
+    expect(skeleton).to.be.instanceOf(HTMLInputElement);
+
+    // Assert that the skeleton has the correct tag name
+    expect(skeleton.tagName).to.be.equal('INPUT');
+
+    // Assert that the skeleton has the correct class name
+    expect(skeleton.className).to.be.equal('input-element');
+
+    // Assert that the skeleton has the correct name attribute
+    expect(skeleton.getAttribute('name')).to.be.equal('number');
+
+    // Assert that the skeleton has the correct type attribute
+    expect(skeleton.getAttribute('type')).to.be.equal('text');
+
+    // Assert that the skeleton has the correct autofocus attribute
+    expect(skeleton.autofocus).to.be.true;
+
+    // Assert that the skeleton has the correct inputMode attribute
+    expect(skeleton.getAttribute('inputMode')).to.be.equal('none');
+
+    // Assert that the skeleton has the correct autocomplete attribute
+    expect(skeleton.getAttribute('autocomplete')).to.be.equal('off');
+
+    // Simulate a click event on the skeleton
+    const inputEvent = new Event('input');
+    skeleton.dispatchEvent(inputEvent);
+
+    // Assert that the inputEventHandlerStub called once
+    expect(inputEventHandlerStub.calledOnce).to.be.true;
+  });
 });

@@ -182,4 +182,21 @@ describe('Test Input Element', () => {
     // Assert that makeSureFocusedSpy call once
     expect(makeSureFocusedSpy.calledOnce).to.be.true;
   });
+
+  it('selectionEndPosition should return the correct selection end position', () => {
+    // Create InputElement instance
+    const input = new InputElement(config);
+
+    // Create spy for makeSureFocused
+    const makeSureFocusedSpy = sinon.spy(input, 'makeSureFocused');
+
+    // build InputElement
+    input.build(document.body);
+
+    // Call selectionEndPosition and assert the value
+    expect(input.selectionEndPosition).to.equal(0);
+
+    // Assert that makeSureFocusedSpy call once
+    expect(makeSureFocusedSpy.calledOnce).to.be.true;
+  });
 });

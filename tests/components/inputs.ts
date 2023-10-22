@@ -323,4 +323,27 @@ describe('Test Input Element', () => {
     // (first time for remove value and second time for replaceValue)
     expect(inputEventHandlerSpy.calledTwice).to.be.true;
   });
+
+  it('clear should set the value to an empty string', () => {
+    // Create InputElement instance
+    const input = new InputElement(config);
+
+    // Create spy for focus
+    const focusSpy = sinon.spy(input, 'focus');
+
+    // build InputElement
+    input.build(document.body);
+
+    // Set input element value
+    input.querySelector.value = 'hello';
+
+    // Call clear method
+    input.clear();
+
+    // Assert input value is empty
+    expect(input.querySelector.value).to.equal('');
+
+    // Assert that the focusSpy called once
+    expect(focusSpy.calledOnce).to.be.true;
+  });
 });

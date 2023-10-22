@@ -245,4 +245,18 @@ describe('Test Input Element', () => {
     // Assert that the focused returns false
     expect(input.focused).to.be.false;
   });
+
+  it('value should return correct value', () => {
+    // Create InputElement instance
+    const input = new InputElement(config);
+
+    // build InputElement
+    input.build(document.body);
+
+    // Set input element value
+    input.querySelector.value = 'hello';
+
+    // Assert that the focused returns false
+    expect(input.value).to.be.equal('hello');
+  });
 });

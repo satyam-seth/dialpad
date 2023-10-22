@@ -165,4 +165,21 @@ describe('Test Input Element', () => {
     // but called once because the input element is already focused.
     expect(focusSpy.calledOnce).to.be.true;
   });
+
+  it('selectionStartPosition should return the correct selection start position', () => {
+    // Create InputElement instance
+    const input = new InputElement(config);
+
+    // Create spy for makeSureFocused
+    const makeSureFocusedSpy = sinon.spy(input, 'makeSureFocused');
+
+    // build InputElement
+    input.build(document.body);
+
+    // Call selectionStartPosition and assert the value
+    expect(input.selectionStartPosition).to.equal(0);
+
+    // Assert that makeSureFocusedSpy call once
+    expect(makeSureFocusedSpy.calledOnce).to.be.true;
+  });
 });

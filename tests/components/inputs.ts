@@ -199,4 +199,30 @@ describe('Test Input Element', () => {
     // Assert that makeSureFocusedSpy call once
     expect(makeSureFocusedSpy.calledOnce).to.be.true;
   });
+
+  it('selectionPosition should set the correct selection position', () => {
+    // Create InputElement instance
+    const input = new InputElement(config);
+
+    // Create spy for makeSureFocused
+    const makeSureFocusedSpy = sinon.spy(input, 'makeSureFocused');
+
+    // build InputElement
+    input.build(document.body);
+
+    // Set input field value
+    input.querySelector.value = 'hello';
+
+    // Call selectionPosition to set the selection position
+    input.selectionPosition = 2;
+
+    // Assert that makeSureFocusedSpy call once
+    expect(makeSureFocusedSpy.calledOnce).to.be.true;
+
+    // Assert the selection start position is correctly set
+    expect(input.selectionStartPosition).to.equal(2);
+
+    // Assert the selection end position is correctly set
+    expect(input.selectionEndPosition).to.equal(2);
+  });
 });

@@ -276,7 +276,7 @@ export default class InputElement {
    * `input` event handler
    *
    */
-  private inputEventHandler() {
+  inputEventHandler() {
     // Remove unwanted symbols and allow only digits, +, *, and #
     this.validation();
 

@@ -346,4 +346,44 @@ describe('Test Input Element', () => {
     // Assert that the focusSpy called once
     expect(focusSpy.calledOnce).to.be.true;
   });
+
+  it('validation should update correct value and selection position after removing unwanted characters', () => {
+    // Create InputElement instance
+    const input = new InputElement(config);
+
+    // build InputElement
+    input.build(document.body);
+
+    // Set initial state
+    input.value = '123abc*456#';
+
+    // Create spy for value getter and setter
+    const valueSpy = sinon.spy(input, 'value', ['get', 'set']);
+
+    // Create spy for selectionStartPosition getter
+    const selectionStartPositionGetterSpy = sinon.spy(
+      input,
+      'selectionStartPosition',
+      ['get']
+    );
+
+    // Create spy for selectionStartPosition setter
+    const selectionPositionSpy = sinon.spy(input, 'selectionPosition', ['set']);
+
+    // Call the validation method
+    input.validation();
+
+    // Assert that the focusSpy called once
+    expect(valueSpy.get.calledOnce).to.be.true;
+
+    // Assert that the selectionStartPositionGetterStub called once
+    expect(selectionStartPositionGetterSpy.get.calledOnce).to.be.true;
+
+    // Assert that the value is updated correctly
+    expect(valueSpy.set.calledOnceWith('123*456#')).to.be.true;
+
+    // Assert that the selection position is updated correctly - 13 + 8 -13 = 8
+    expect(selectionPositionSpy.set.calledOnceWith('123*456#'.length)).to.be
+      .true;
+  });
 });

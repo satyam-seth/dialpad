@@ -256,15 +256,16 @@ export default class InputElement {
    */
   validation() {
     // prepare updated state
+    const { value } = this;
     const caretPositionBeforeRemoveUnwantedChars = this.selectionStartPosition;
-    const updatedValueAfterRemoveUnwantedChars = this.value.replace(
+    const updatedValueAfterRemoveUnwantedChars = value.replace(
       /[^0-9+*#]/g,
       ''
     );
     const updatedCaretPosition =
       caretPositionBeforeRemoveUnwantedChars +
       updatedValueAfterRemoveUnwantedChars.length -
-      this.value.length;
+      value.length;
 
     // update state
     this.value = updatedValueAfterRemoveUnwantedChars;

@@ -425,7 +425,7 @@ describe('Test Input Element', () => {
     onValueNonEmptySpy.resetHistory();
 
     // Set input element value
-    input.querySelector.value = 'hello';
+    input.querySelector.value = '1234';
 
     // Call inputEventHandler method
     input.inputEventHandler();
@@ -433,11 +433,10 @@ describe('Test Input Element', () => {
     // Assert that validationSpy is called
     expect(validationSpy.calledOnce).to.be.true;
 
-    // TODO: fix this
-    // // Assert onValueEmptySpy is not called
-    // expect(onValueEmptySpy.calledOnce).to.be.false;
+    // Assert onValueEmptySpy is not called
+    expect(onValueEmptySpy.calledOnce).to.be.false;
 
-    // // Assert onValueNonEmptySpy is called
-    // expect(onValueNonEmptySpy.calledOnce).to.be.true;
+    // Assert onValueNonEmptySpy is called
+    expect(onValueNonEmptySpy.calledOnce).to.be.true;
   });
 });

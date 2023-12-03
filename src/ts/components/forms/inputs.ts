@@ -121,6 +121,15 @@ export default class InputElement {
 
   /**
    *
+   * Focus input element
+   *
+   */
+  focus() {
+    this.querySelector.focus();
+  }
+
+  /**
+   *
    * To check whether the input element is focused or not
    *
    */
@@ -146,15 +155,6 @@ export default class InputElement {
    */
   set value(value: string) {
     this.querySelector.value = value;
-  }
-
-  /**
-   *
-   * Focus input element
-   *
-   */
-  focus() {
-    this.querySelector.focus();
   }
 
   /**

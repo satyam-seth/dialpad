@@ -376,7 +376,7 @@ describe('Test Input Element', () => {
     // Assert that the focusSpy called once
     expect(valueSpy.get.calledOnce).to.be.true;
 
-    // Assert that the selectionStartPositionGetterStub called once
+    // Assert that the selectionStartPositionGetterSpy called once
     expect(selectionStartPositionGetterSpy.get.calledOnce).to.be.true;
 
     // Assert that the value is updated correctly
@@ -438,5 +438,83 @@ describe('Test Input Element', () => {
 
     // Assert onValueNonEmptySpy is called
     expect(onValueNonEmptySpy.calledOnce).to.be.true;
+  });
+
+  it.only('removeValue should remove characters from the value starting at the caret position', () => {
+    // Create InputElement instance
+    const input = new InputElement(config);
+
+    // Create spy for value getter and setter
+    const valueSpy = sinon.spy(input, 'value', ['get', 'set']);
+
+    // Create spy for selectionStartPosition getter and setter
+    const selectionStartPositionGetterSpy = sinon.spy(
+      input,
+      'selectionStartPosition',
+      ['get']
+    );
+
+    // Create spy for selectionPosition setter
+    const selectionPositionSpy = sinon.spy(input, 'selectionPosition', ['set']);
+
+    // Create spy for inputEventHandler
+    const inputEventHandlerSpy = sinon.spy(input, 'inputEventHandler');
+
+    // build InputElement
+    input.build(document.body);
+
+    // Call removeValue method
+    input.removeValue();
+
+    // Assert that the focusSpy called once
+    expect(valueSpy.get.calledOnce).to.be.true;
+
+    // Assert that the selectionStartPositionGetterSpy called once
+    expect(selectionStartPositionGetterSpy.get.calledOnce).to.be.true;
+
+    // Assert that the valueSpy setter not called
+    expect(valueSpy.set.called).to.be.false;
+
+    // Assert that the selectionPositionSpy setter not called
+    expect(selectionPositionSpy.set.called).to.be.false;
+
+    // Assert that the inputEventHandlerSpy not called
+    expect(inputEventHandlerSpy.called).to.be.false;
+
+    // Reset spies
+    valueSpy.get.resetHistory();
+    valueSpy.set.resetHistory();
+    selectionStartPositionGetterSpy.get.resetHistory();
+    selectionPositionSpy.set.resetHistory();
+    inputEventHandlerSpy.resetHistory();
+
+    // Set input element value
+    input.querySelector.value = '123456789';
+
+    input.querySelector.selectionStart = 6;
+
+    // Call removeValue method
+    input.removeValue(2);
+
+    // Assert that the focusSpy called thrice
+    expect(valueSpy.get.calledThrice).to.be.true;
+
+    // Assert that the selectionStartPositionGetterSpy called twice
+    expect(selectionStartPositionGetterSpy.get.calledTwice).to.be.true;
+
+    // Assert that the valueSpy setter first time called twice
+    expect(valueSpy.set.calledTwice).to.be.true;
+
+    // Assert that the valueSpy setter first time called with correct args
+    expect(valueSpy.set.getCall(0).calledWithExactly('1234789')).to.be.true;
+
+    // Assert that the selectionPositionSpy setter called twice
+    expect(selectionPositionSpy.set.calledTwice).to.be.true;
+
+    // Assert that the selectionPositionSpy setter first time called with correct args
+    expect(selectionPositionSpy.set.getCall(0).calledWithExactly(4)).to.be.true;
+
+    // Assert that the inputEventHandlerSpy called once
+    expect(inputEventHandlerSpy.calledOnce).to.be.true;
   });
 });

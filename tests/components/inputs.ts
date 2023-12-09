@@ -440,7 +440,7 @@ describe('Test Input Element', () => {
     expect(onValueNonEmptySpy.calledOnce).to.be.true;
   });
 
-  it.only('removeValue should remove characters from the value starting at the caret position', () => {
+  it('removeValue should remove characters from the value starting at the caret position', () => {
     // Create InputElement instance
     const input = new InputElement(config);
 

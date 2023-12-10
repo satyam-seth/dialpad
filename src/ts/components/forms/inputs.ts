@@ -23,7 +23,7 @@ export default class InputElement {
    * input element skeleton
    *
    */
-  private get skeleton(): HTMLInputElement {
+  get skeleton(): HTMLInputElement {
     const input = document.createElement('input');
     input.id = this.id;
     input.className = 'input-element';
@@ -121,6 +121,15 @@ export default class InputElement {
 
   /**
    *
+   * Focus input element
+   *
+   */
+  focus() {
+    this.querySelector.focus();
+  }
+
+  /**
+   *
    * To check whether the input element is focused or not
    *
    */
@@ -146,15 +155,6 @@ export default class InputElement {
    */
   set value(value: string) {
     this.querySelector.value = value;
-  }
-
-  /**
-   *
-   * Focus input element
-   *
-   */
-  focus() {
-    this.querySelector.focus();
   }
 
   /**
@@ -256,15 +256,16 @@ export default class InputElement {
    */
   validation() {
     // prepare updated state
+    const { value } = this;
     const caretPositionBeforeRemoveUnwantedChars = this.selectionStartPosition;
-    const updatedValueAfterRemoveUnwantedChars = this.value.replace(
+    const updatedValueAfterRemoveUnwantedChars = value.replace(
       /[^0-9+*#]/g,
       ''
     );
     const updatedCaretPosition =
       caretPositionBeforeRemoveUnwantedChars +
       updatedValueAfterRemoveUnwantedChars.length -
-      this.value.length;
+      value.length;
 
     // update state
     this.value = updatedValueAfterRemoveUnwantedChars;
@@ -276,7 +277,7 @@ export default class InputElement {
    * `input` event handler
    *
    */
-  private inputEventHandler() {
+  inputEventHandler() {
     // Remove unwanted symbols and allow only digits, +, *, and #
     this.validation();
 

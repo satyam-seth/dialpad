@@ -324,7 +324,7 @@ describe('Test Dialpad Button', () => {
     const button = new DialpadButton(validConfig);
 
     // Create spy for skeleton getter
-    const skeletonGetterSpy = sinon.spy(button, 'skeleton', ['get']);
+    const skeletonSpy = sinon.spy(button, 'skeleton', ['get']);
 
     // Create spy for appendChild method
     const appendChildSpy = sinon.spy(document.body, 'appendChild');
@@ -333,7 +333,7 @@ describe('Test Dialpad Button', () => {
     button.build(document.body);
 
     // Assert that the skeleton getter was accessed
-    expect(skeletonGetterSpy.get.calledOnce).to.be.true;
+    expect(skeletonSpy.get.calledOnce).to.be.true;
 
     // Assert that the parentElement appendChild was called once with the correct argument
     expect(appendChildSpy.calledOnceWith(sinon.match.instanceOf(HTMLElement)))

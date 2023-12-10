@@ -81,7 +81,7 @@ describe('Test Input Element', () => {
     const input = new InputElement(config);
 
     // Create spy for skeleton getter
-    const skeletonGetterSpy = sinon.spy(input, 'skeleton', ['get']);
+    const skeletonSpy = sinon.spy(input, 'skeleton', ['get']);
 
     // Create spy for appendChild method
     const appendChildSpy = sinon.spy(document.body, 'appendChild');
@@ -90,7 +90,7 @@ describe('Test Input Element', () => {
     input.build(document.body);
 
     // Assert that the skeleton getter was accessed
-    expect(skeletonGetterSpy.get.calledOnce).to.be.true;
+    expect(skeletonSpy.get.calledOnce).to.be.true;
 
     // Assert that the parentElement appendChild was called once with the correct argument
     expect(appendChildSpy.calledOnceWith(sinon.match.instanceOf(HTMLElement)))
@@ -361,7 +361,7 @@ describe('Test Input Element', () => {
     const valueSpy = sinon.spy(input, 'value', ['get', 'set']);
 
     // Create spy for selectionStartPosition getter
-    const selectionStartPositionGetterSpy = sinon.spy(
+    const selectionStartPositionSpy = sinon.spy(
       input,
       'selectionStartPosition',
       ['get']
@@ -376,8 +376,8 @@ describe('Test Input Element', () => {
     // Assert that the focusSpy called once
     expect(valueSpy.get.calledOnce).to.be.true;
 
-    // Assert that the selectionStartPositionGetterSpy called once
-    expect(selectionStartPositionGetterSpy.get.calledOnce).to.be.true;
+    // Assert that the selectionStartPositionSpy called once
+    expect(selectionStartPositionSpy.get.calledOnce).to.be.true;
 
     // Assert that the value is updated correctly
     expect(valueSpy.set.calledOnceWith('123*456#')).to.be.true;
@@ -448,7 +448,7 @@ describe('Test Input Element', () => {
     const valueSpy = sinon.spy(input, 'value', ['get', 'set']);
 
     // Create spy for selectionStartPosition getter
-    const selectionStartPositionGetterSpy = sinon.spy(
+    const selectionStartPositionSpy = sinon.spy(
       input,
       'selectionStartPosition',
       ['get']
@@ -469,8 +469,8 @@ describe('Test Input Element', () => {
     // Assert that the focusSpy called once
     expect(valueSpy.get.calledOnce).to.be.true;
 
-    // Assert that the selectionStartPositionGetterSpy called once
-    expect(selectionStartPositionGetterSpy.get.calledOnce).to.be.true;
+    // Assert that the selectionStartPositionSpy called once
+    expect(selectionStartPositionSpy.get.calledOnce).to.be.true;
 
     // Assert that the valueSpy setter not called
     expect(valueSpy.set.called).to.be.false;
@@ -484,7 +484,7 @@ describe('Test Input Element', () => {
     // Reset spies
     valueSpy.get.resetHistory();
     valueSpy.set.resetHistory();
-    selectionStartPositionGetterSpy.get.resetHistory();
+    selectionStartPositionSpy.get.resetHistory();
     selectionPositionSpy.set.resetHistory();
     inputEventHandlerSpy.resetHistory();
 
@@ -500,8 +500,8 @@ describe('Test Input Element', () => {
     // Assert that the valueSpy getter called thrice
     expect(valueSpy.get.calledThrice).to.be.true;
 
-    // Assert that the selectionStartPositionGetterSpy called twice
-    expect(selectionStartPositionGetterSpy.get.calledTwice).to.be.true;
+    // Assert that the selectionStartPositionSpy called twice
+    expect(selectionStartPositionSpy.get.calledTwice).to.be.true;
 
     // Assert that the valueSpy setter first time called twice
     expect(valueSpy.set.calledTwice).to.be.true;
@@ -527,18 +527,16 @@ describe('Test Input Element', () => {
     const valueSpy = sinon.spy(input, 'value', ['get', 'set']);
 
     // Create spy for selectionStartPosition getter and setter
-    const selectionStartPositionGetterSpy = sinon.spy(
+    const selectionStartPositionSpy = sinon.spy(
       input,
       'selectionStartPosition',
       ['get']
     );
 
     // Create spy for selectionEndPosition getter and setter
-    const selectionEndPositionGetterSpy = sinon.spy(
-      input,
-      'selectionEndPosition',
-      ['get']
-    );
+    const selectionEndPositionSpy = sinon.spy(input, 'selectionEndPosition', [
+      'get',
+    ]);
 
     // Create spy for selectionPosition setter
     const selectionPositionSpy = sinon.spy(input, 'selectionPosition', ['set']);
@@ -561,11 +559,11 @@ describe('Test Input Element', () => {
     // Assert that the valueSpy getter called once
     expect(valueSpy.get.calledOnce).to.be.true;
 
-    // Assert that the selectionStartPositionGetterSpy called once
-    expect(selectionStartPositionGetterSpy.get.calledOnce).to.be.true;
+    // Assert that the selectionStartPositionSpy called once
+    expect(selectionStartPositionSpy.get.calledOnce).to.be.true;
 
-    // Assert that the selectionEndPositionGetterSpy called once
-    expect(selectionEndPositionGetterSpy.get.calledOnce).to.be.true;
+    // Assert that the selectionEndPositionSpy called once
+    expect(selectionEndPositionSpy.get.calledOnce).to.be.true;
 
     // Assert that the valueSpy setter called once with correct args
     expect(valueSpy.set.calledOnceWithExactly('123456789')).to.be.true;
@@ -582,18 +580,16 @@ describe('Test Input Element', () => {
     const valueSpy = sinon.spy(input, 'value', ['get', 'set']);
 
     // Create spy for selectionStartPosition getter and setter
-    const selectionStartPositionGetterSpy = sinon.spy(
+    const selectionStartPositionSpy = sinon.spy(
       input,
       'selectionStartPosition',
       ['get']
     );
 
     // Create spy for selectionEndPosition getter and setter
-    const selectionEndPositionGetterSpy = sinon.spy(
-      input,
-      'selectionEndPosition',
-      ['get']
-    );
+    const selectionEndPositionSpy = sinon.spy(input, 'selectionEndPosition', [
+      'get',
+    ]);
 
     // Create spy for selectionPosition setter
     const selectionPositionSpy = sinon.spy(input, 'selectionPosition', ['set']);
@@ -616,11 +612,11 @@ describe('Test Input Element', () => {
     // Assert that the valueSpy getter called once
     expect(valueSpy.get.calledOnce).to.be.true;
 
-    // Assert that the selectionStartPositionGetterSpy called once
-    expect(selectionStartPositionGetterSpy.get.calledOnce).to.be.true;
+    // Assert that the selectionStartPositionSpy called once
+    expect(selectionStartPositionSpy.get.calledOnce).to.be.true;
 
-    // Assert that the selectionEndPositionGetterSpy called once
-    expect(selectionEndPositionGetterSpy.get.calledOnce).to.be.true;
+    // Assert that the selectionEndPositionSpy called once
+    expect(selectionEndPositionSpy.get.calledOnce).to.be.true;
 
     // Assert that the valueSpy setter called once with correct args
     expect(valueSpy.set.calledOnceWithExactly('123456')).to.be.true;

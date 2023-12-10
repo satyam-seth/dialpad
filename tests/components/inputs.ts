@@ -447,7 +447,7 @@ describe('Test Input Element', () => {
     // Create spy for value getter and setter
     const valueSpy = sinon.spy(input, 'value', ['get', 'set']);
 
-    // Create spy for selectionStartPosition getter and setter
+    // Create spy for selectionStartPosition getter
     const selectionStartPositionGetterSpy = sinon.spy(
       input,
       'selectionStartPosition',
@@ -491,12 +491,13 @@ describe('Test Input Element', () => {
     // Set input element value
     input.querySelector.value = '123456789';
 
+    // Set selection start position
     input.querySelector.selectionStart = 6;
 
     // Call removeValue method
     input.removeValue(2);
 
-    // Assert that the focusSpy called thrice
+    // Assert that the valueSpy getter called thrice
     expect(valueSpy.get.calledThrice).to.be.true;
 
     // Assert that the selectionStartPositionGetterSpy called twice
@@ -516,5 +517,115 @@ describe('Test Input Element', () => {
 
     // Assert that the inputEventHandlerSpy called once
     expect(inputEventHandlerSpy.calledOnce).to.be.true;
+  });
+
+  it('insertValue should insert a value at the caret position', () => {
+    // Create InputElement instance
+    const input = new InputElement(config);
+
+    // Create spy for value getter and setter
+    const valueSpy = sinon.spy(input, 'value', ['get', 'set']);
+
+    // Create spy for selectionStartPosition getter and setter
+    const selectionStartPositionGetterSpy = sinon.spy(
+      input,
+      'selectionStartPosition',
+      ['get']
+    );
+
+    // Create spy for selectionEndPosition getter and setter
+    const selectionEndPositionGetterSpy = sinon.spy(
+      input,
+      'selectionEndPosition',
+      ['get']
+    );
+
+    // Create spy for selectionPosition setter
+    const selectionPositionSpy = sinon.spy(input, 'selectionPosition', ['set']);
+
+    // build InputElement
+    input.build(document.body);
+
+    // Set input element value
+    input.querySelector.value = '123789';
+
+    // Set selection start position
+    input.querySelector.selectionStart = 3;
+
+    // Set selection end position
+    input.querySelector.selectionEnd = 3;
+
+    // Call insertValue method - Insert '456' at the caret position
+    input.insertValue('456');
+
+    // Assert that the valueSpy getter called once
+    expect(valueSpy.get.calledOnce).to.be.true;
+
+    // Assert that the selectionStartPositionGetterSpy called once
+    expect(selectionStartPositionGetterSpy.get.calledOnce).to.be.true;
+
+    // Assert that the selectionEndPositionGetterSpy called once
+    expect(selectionEndPositionGetterSpy.get.calledOnce).to.be.true;
+
+    // Assert that the valueSpy setter called once with correct args
+    expect(valueSpy.set.calledOnceWithExactly('123456789')).to.be.true;
+
+    // Assert that the selectionPositionSpy setter called once with correct args
+    expect(selectionPositionSpy.set.calledOnceWithExactly(6)).to.be.true;
+  });
+
+  it('insertValue should replace selected value with the new value', () => {
+    // Create InputElement instance
+    const input = new InputElement(config);
+
+    // Create spy for value getter and setter
+    const valueSpy = sinon.spy(input, 'value', ['get', 'set']);
+
+    // Create spy for selectionStartPosition getter and setter
+    const selectionStartPositionGetterSpy = sinon.spy(
+      input,
+      'selectionStartPosition',
+      ['get']
+    );
+
+    // Create spy for selectionEndPosition getter and setter
+    const selectionEndPositionGetterSpy = sinon.spy(
+      input,
+      'selectionEndPosition',
+      ['get']
+    );
+
+    // Create spy for selectionPosition setter
+    const selectionPositionSpy = sinon.spy(input, 'selectionPosition', ['set']);
+
+    // build InputElement
+    input.build(document.body);
+
+    // Set input element value
+    input.querySelector.value = '123789';
+
+    // Set selection start position
+    input.querySelector.selectionStart = 3;
+
+    // Set selection end position
+    input.querySelector.selectionEnd = 6;
+
+    // Call insertValue method - Insert '456' at the caret position
+    input.insertValue('456');
+
+    // Assert that the valueSpy getter called once
+    expect(valueSpy.get.calledOnce).to.be.true;
+
+    // Assert that the selectionStartPositionGetterSpy called once
+    expect(selectionStartPositionGetterSpy.get.calledOnce).to.be.true;
+
+    // Assert that the selectionEndPositionGetterSpy called once
+    expect(selectionEndPositionGetterSpy.get.calledOnce).to.be.true;
+
+    // Assert that the valueSpy setter called once with correct args
+    expect(valueSpy.set.calledOnceWithExactly('123456')).to.be.true;
+
+    // Assert that the selectionPositionSpy setter called once with correct args
+    expect(selectionPositionSpy.set.calledOnceWithExactly(6)).to.be.true;
   });
 });

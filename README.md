@@ -29,3 +29,8 @@ A dialpad build using ts and scss
 
 - [sinon npm package](https://www.npmjs.com/package/sinon)
 - [sinon types npm package](https://www.npmjs.com/package/@types/sinon)
+
+## [Playwright Setup](https://github.com/satyam-seth/dialpad/pull/73)
+
+- [playwright installation doc link](https://playwright.dev/docs/intro#installing-playwright)
+- [http-server npm package](https://www.npmjs.com/package/http-server)

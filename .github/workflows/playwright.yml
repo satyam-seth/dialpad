@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    name: 'Playright 👩🏽‍🚒 E2E Test 🚀'
+    name: 'Playwright 👩🏽‍🚒 E2E Test 🚀'
     timeout-minutes: 60
     runs-on: ubuntu-latest
 

@@ -192,3 +192,81 @@ test('Dialpad has expected UI components', async ({ page }) => {
   const copyrightText = await copyrightPara.innerText();
   expect(copyrightText).toEqual('Made by • Satyam Seth Ⓒ 2023');
 });
+
+test('Dialpad buttons press working', async ({ page }) => {
+  await page.goto('/');
+
+  // digits buttons selectors
+  const digitButtonsSelectors = [
+    'button#dialpad-btn-one',
+    'button#dialpad-btn-two',
+    'button#dialpad-btn-three',
+    'button#dialpad-btn-four',
+    'button#dialpad-btn-five',
+    'button#dialpad-btn-six',
+    'button#dialpad-btn-seven',
+    'button#dialpad-btn-eight',
+    'button#dialpad-btn-nine',
+    'button#dialpad-btn-star',
+    'button#dialpad-btn-zero',
+    'button#dialpad-btn-hash',
+  ];
+
+  // Button for digit zero
+  const btnForDigitZero = page.locator('button#dialpad-btn-zero');
+
+  // Button for call
+  const btnForCall = page.locator('button.keypad__call-btn');
+
+  // Button for backspace
+  const btnForBackspace = page.locator('button.keypad__backspace-btn');
+
+  // Input field element
+  const inputElement = page.locator('input#input-demo.input-element');
+
+  // Long press on button for digit zero to input + sign
+  await btnForDigitZero.click({ delay: 600 });
+  await page.waitForTimeout(500);
+
+  // Click on all button for all digits to input digits
+  // eslint-disable-next-line no-restricted-syntax
+  for (const selector of digitButtonsSelectors) {
+    const btn = page.locator(selector);
+    // eslint-disable-next-line no-await-in-loop
+    await btn.click();
+    // eslint-disable-next-line no-await-in-loop
+    await page.waitForTimeout(500);
+  }
+
+  // Assert that all buttons click are working as expected
+  const value = await inputElement.inputValue();
+  expect(value).toEqual('+123456789*0#');
+
+  // Click on button for call
+  await btnForCall.click();
+  await page.waitForTimeout(500);
+
+  // click on button for backspace
+  await btnForBackspace.click();
+  await page.waitForTimeout(500);
+
+  // Assert that backspace button remove last input field element value
+  const valueAfterBackspaceClick = await inputElement.inputValue();
+  expect(valueAfterBackspaceClick).toEqual('+123456789*0');
+
+  // Long press on button for backspace to clear input field element value
+  await btnForBackspace.click({ delay: 600 });
+  await page.waitForTimeout(500);
+
+  // Assert that input field element value is empty
+  const valueAfterBackspaceLongPress = await inputElement.inputValue();
+  expect(valueAfterBackspaceLongPress).toEqual('');
+
+  // Click on button for call for recent called number
+  await btnForCall.click();
+  await page.waitForTimeout(500);
+
+  // Assert that input field element value is refilled with recent called number
+  const valueAfterRecentCallLongPress = await inputElement.inputValue();
+  expect(valueAfterRecentCallLongPress).toEqual('+123456789*0#');
+});

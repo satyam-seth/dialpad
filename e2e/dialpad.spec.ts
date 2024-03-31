@@ -190,7 +190,9 @@ test('Dialpad has expected UI components', async ({ page }) => {
 
   // Assert that copyright para has correct text
   const copyrightText = await copyrightPara.innerText();
-  expect(copyrightText).toEqual('Made by • Satyam Seth Ⓒ 2023');
+  expect(copyrightText).toEqual(
+    `Made by • Satyam Seth Ⓒ ${new Date().getFullYear()}`
+  );
 });
 
 test('Dialpad buttons press working', async ({ page }) => {

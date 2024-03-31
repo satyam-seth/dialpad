@@ -190,7 +190,9 @@ test('Dialpad has expected UI components', async ({ page }) => {
 
   // Assert that copyright para has correct text
   const copyrightText = await copyrightPara.innerText();
-  expect(copyrightText).toEqual('Made by • Satyam Seth Ⓒ 2023');
+  expect(copyrightText).toEqual(
+    `Made by • Satyam Seth Ⓒ ${new Date().getFullYear()}`
+  );
 });
 
 test('Dialpad buttons press working', async ({ page }) => {
@@ -228,7 +230,7 @@ test('Dialpad buttons press working', async ({ page }) => {
   await btnForDigitZero.click({ delay: 600 });
   await page.waitForTimeout(500);
 
-  // Click on all button for all digits to input digits
+  // Click on all digits buttons to input digits
   // eslint-disable-next-line no-restricted-syntax
   for (const selector of digitButtonsSelectors) {
     const btn = page.locator(selector);

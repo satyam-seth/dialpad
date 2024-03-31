@@ -270,3 +270,82 @@ test('Dialpad buttons press working', async ({ page }) => {
   const valueAfterRecentCallLongPress = await inputElement.inputValue();
   expect(valueAfterRecentCallLongPress).toEqual('+123456789*0#');
 });
+
+test('Dialpad selection cut paste working', async ({ page }) => {
+  await page.goto('/');
+
+  // digits buttons selectors
+  const digitButtonsSelectors = [
+    'button#dialpad-btn-one',
+    'button#dialpad-btn-two',
+    'button#dialpad-btn-three',
+    'button#dialpad-btn-four',
+    'button#dialpad-btn-five',
+    'button#dialpad-btn-six',
+    'button#dialpad-btn-seven',
+    'button#dialpad-btn-eight',
+    'button#dialpad-btn-nine',
+    'button#dialpad-btn-star',
+    'button#dialpad-btn-zero',
+    'button#dialpad-btn-hash',
+  ];
+
+  // Click on all digits buttons to input digits
+  // eslint-disable-next-line no-restricted-syntax
+  for (const selector of digitButtonsSelectors) {
+    const btn = page.locator(selector);
+    // eslint-disable-next-line no-await-in-loop
+    await btn.click();
+    // eslint-disable-next-line no-await-in-loop
+    await page.waitForTimeout(500);
+  }
+
+  // Input field element
+  const inputElement = page.locator('input#input-demo.input-element');
+
+  // Assert input field element value contains all digits
+  const valueAfterBackspaceClick = await inputElement.inputValue();
+  expect(valueAfterBackspaceClick).toEqual('123456789*0#');
+  await page.waitForTimeout(500);
+
+  // Select text of input field
+  await inputElement.selectText();
+  await page.waitForTimeout(500);
+
+  // Press key one
+  const btnForDigitOne = page.locator(digitButtonsSelectors[0]);
+  await btnForDigitOne.click();
+  await page.waitForTimeout(500);
+
+  // Assert input field input value contain only one
+  const valueAfterBtnForDigitOneClick = await inputElement.inputValue();
+  expect(valueAfterBtnForDigitOneClick).toEqual('1');
+  await page.waitForTimeout(500);
+
+  // Select text of input field
+  await inputElement.selectText();
+  await page.waitForTimeout(500);
+
+  // Cut input field value
+  await page.keyboard.press('Control+X');
+  await page.waitForTimeout(500);
+
+  // Press key two
+  const btnForDigitTwo = page.locator(digitButtonsSelectors[1]);
+  await btnForDigitTwo.click();
+  await page.waitForTimeout(500);
+
+  // Assert input field input value contain only one
+  const valueAfterBtnForDigitTwoClick = await inputElement.inputValue();
+  expect(valueAfterBtnForDigitTwoClick).toEqual('2');
+  await page.waitForTimeout(500);
+
+  // Paste value to input field
+  await page.keyboard.press('Control+V');
+  await page.waitForTimeout(500);
+
+  // Assert input field input value after paste
+  const valueAfterPaste = await inputElement.inputValue();
+  expect(valueAfterPaste).toEqual('21');
+  await page.waitForTimeout(500);
+});

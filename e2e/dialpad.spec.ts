@@ -228,7 +228,7 @@ test('Dialpad buttons press working', async ({ page }) => {
   await btnForDigitZero.click({ delay: 600 });
   await page.waitForTimeout(500);
 
-  // Click on all button for all digits to input digits
+  // Click on all digits buttons to input digits
   // eslint-disable-next-line no-restricted-syntax
   for (const selector of digitButtonsSelectors) {
     const btn = page.locator(selector);

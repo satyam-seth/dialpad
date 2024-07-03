@@ -204,27 +204,34 @@ export default class InputElement {
    *
    */
   removeValue(count: number = 1) {
-    // capture current state
+    // Capture current state
     const currentValue = this.value;
-    const currentCaretPosition = this.selectionStartPosition;
+    const { selectionStartPosition, selectionEndPosition } = this;
 
-    // prepare updated state
-    const beforeCaretValue = currentValue.slice(0, currentCaretPosition);
-
-    // if before caret value is empty do nothing
-    if (beforeCaretValue !== '') {
-      const afterCaretValue = currentValue.slice(currentCaretPosition);
-      const endIndex = beforeCaretValue.length - count;
+    // If there is a selection, remove the selected text
+    if (selectionStartPosition !== selectionEndPosition) {
       const updatedValue =
-        beforeCaretValue.slice(0, endIndex) + afterCaretValue;
-      const updatedCaretPosition = currentCaretPosition - count;
+        currentValue.slice(0, selectionStartPosition) +
+        currentValue.slice(selectionEndPosition);
 
-      // update state
+      // Update state
       this.value = updatedValue;
-      this.selectionPosition = updatedCaretPosition;
+      this.selectionPosition = selectionStartPosition;
+    } else {
+      // Otherwise, remove characters before the caret position
+      const beforeCaretValue = currentValue.slice(0, selectionStartPosition);
 
-      // check empty or not
-      this.inputEventHandler();
+      if (beforeCaretValue !== '') {
+        const afterCaretValue = currentValue.slice(selectionStartPosition);
+        const endIndex = beforeCaretValue.length - count;
+        const updatedValue =
+          beforeCaretValue.slice(0, endIndex) + afterCaretValue;
+        const updatedCaretPosition = selectionStartPosition - count;
+
+        // Update state
+        this.value = updatedValue;
+        this.selectionPosition = updatedCaretPosition;
+      }
     }
   }
 
